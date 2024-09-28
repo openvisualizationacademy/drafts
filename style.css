@@ -24,3 +24,8 @@ svg:not(#grid) {
 body {
   text-align: center;
 }
+
+text {
+  font-size: 10px;
+  font-family: sans-serif;
+}

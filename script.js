@@ -35,15 +35,17 @@ function randomizeCoords() {
   ];
 
   // Coin flip to chose horizontal or vertical
-  if (Math.random() > 0.5) {
-    // Horizontal Template
-    from.coords = [0, 1, 1, 0];
-    to.coords = [0, 0, 1, 1];
-  } else {
-    // Vertical Template
-    from.coords = [0, 0, 1, 1];
-    to.coords = [1, 0, 0, 1];
-  }
+  // if (Math.random() > 0.5) {
+
+  // Horizontal Template
+  from.coords = [0, 1, 1, 0];
+  to.coords = [0, 0, 1, 1];
+
+  // } else {
+  //   // Vertical Template
+  //   from.coords = [0, 0, 1, 1];
+  //   to.coords = [1, 0, 0, 1];
+  // }
 
   // Fill with values
   from.coords = from.coords.map((i) => regions[i]() * cell);
@@ -121,3 +123,19 @@ for (let i = 0; i <= steps; i++) {
 
   svg.append(path);
 }
+
+// Draw Letters (for Debugging)
+
+const coords = [...from.coords, ...to.coords];
+["A", "B", "A'", "B'"].forEach((letter, index) => {
+  const start = index * 2;
+  const x = coords[start];
+  const y = coords[start + 1];
+
+  const text = document.createElementNS(ns, "text");
+  text.innerHTML = letter;
+  text.setAttribute("x", x);
+  text.setAttribute("y", y);
+
+  svg.append(text);
+});
