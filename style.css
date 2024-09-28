@@ -21,7 +21,6 @@ svg:not(#grid) {
   margin: 48px auto;
 }
 
-button {
-  display: block;
-  margin: 0 auto;
+body {
+  text-align: center;
 }

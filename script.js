@@ -20,7 +20,6 @@ const from = {
   coords: [cell * 1, cell * 5, cell * 6, cell * 1],
   color: "#f0305d",
 };
-
 const to = {
   coords: [cell * 0, cell * 3, cell * 5, cell * 6],
   color: "#ffc20a",
@@ -28,54 +27,27 @@ const to = {
 
 // Randomize Coordinates
 function randomizeCoords() {
-  // Naive Random
-  // const generator = d3.randomInt(segments + 1);
-  // const randomCell = () => generator() * cell;
-  // from.coords = [...Array(4)].map(() => randomCell());
-  // to.coords = [...Array(4)].map(() => randomCell());
-
-  /*
-  // Halves (Quadrants) Random
+  // Corners (Smallest Second Half) Random
   const half = segments / 2;
-  const halves = [
-    d3.randomInt(0, half + 1), // first half
-    d3.randomInt(half, segments + 1), // second half
+  const regions = [
+    d3.randomInt(0, half + 1),
+    d3.randomInt(half + 2, segments + 1),
   ];
-  // Horizontal Template
-  from.coords = [0, 1, 1, 0];
-  to.coords = [0, 0, 1, 1];
-  // Fill with values
-  from.coords = from.coords.map((i) => halves[i]() * cell);
-  to.coords = to.coords.map((i) => halves[i]() * cell);
-  */
 
-  /*
-  // Corners (Quadrants) Random
-  const half = segments / 2;
-  const halves = [
-    d3.randomInt(0, half), // first half
-    d3.randomInt(half + 1, segments + 1), // second half
-  ];
-  // Horizontal Template
-  from.coords = [0, 1, 1, 0];
-  to.coords = [0, 0, 1, 1];
-  // Fill with values
-  from.coords = from.coords.map((i) => halves[i]() * cell);
-  to.coords = to.coords.map((i) => halves[i]() * cell);
-  */
+  // Coin flip to chose horizontal or vertical
+  if (Math.random() > 0.5) {
+    // Horizontal Template
+    from.coords = [0, 1, 1, 0];
+    to.coords = [0, 0, 1, 1];
+  } else {
+    // Vertical Template
+    from.coords = [0, 0, 1, 1];
+    to.coords = [1, 0, 0, 1];
+  }
 
-  // Corners (Larger First Half) Random
-  const half = segments / 2;
-  const halves = [
-    d3.randomInt(0, half + 1), // first half
-    d3.randomInt(half + 1, segments + 1), // second half
-  ];
-  // Horizontal Template
-  from.coords = [0, 1, 1, 0];
-  to.coords = [0, 0, 1, 1];
   // Fill with values
-  from.coords = from.coords.map((i) => halves[i]() * cell);
-  to.coords = to.coords.map((i) => halves[i]() * cell);
+  from.coords = from.coords.map((i) => regions[i]() * cell);
+  to.coords = to.coords.map((i) => regions[i]() * cell);
 }
 
 randomizeCoords();
