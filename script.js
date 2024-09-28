@@ -3,12 +3,14 @@ import * as d3 from "https://cdn.jsdelivr.net/npm/d3@7/+esm";
 // Namespace
 const ns = "http://www.w3.org/2000/svg";
 
-// Parent
+// Select Elements
 const container = document.querySelector("#container");
+const svg = container.querySelector("#logo");
 
 // Options
+const offsetX = 60;
+const offsetY = 48;
 const side = 168;
-const margin = 24;
 const steps = 255;
 const segments = 6;
 const half = segments / 2;
@@ -45,11 +47,25 @@ function randomizeCoords() {
 // Randomize lines AB and A'B'
 randomizeCoords();
 
+// Offset X and Y
+from.coords = from.coords.map(
+  (value, i) => value + (i % 2 === 0 ? offsetX : offsetY)
+);
+to.coords = to.coords.map(
+  (value, i) => value + (i % 2 === 0 ? offsetX : offsetY)
+);
+
+// TODO: Randomize color palette
+function randomizeColors() {
+  return;
+}
+
+randomizeColors();
+
 // Create interpolator
 const interpolator = d3.interpolate(from, to);
 
 function findIntersection(from, to) {
-  // Coordinates of the two lines
   const x1 = from[0],
     y1 = from[1],
     x2 = from[2],
@@ -59,15 +75,12 @@ function findIntersection(from, to) {
     x4 = to[2],
     y4 = to[3];
 
-  // Calculate the denominator
   const denominator = (x1 - x2) * (y3 - y4) - (y1 - y2) * (x3 - x4);
 
-  // If denominator is 0, the lines are parallel or coincident
   if (denominator === 0) {
-    return null; // No intersection
+    return null;
   }
 
-  // Calculate the intersection point
   const x =
     ((x1 * y2 - y1 * x2) * (x3 - x4) - (x1 - x2) * (x3 * y4 - y3 * x4)) /
     denominator;
@@ -104,43 +117,19 @@ function downloadSVG() {
 }
 download.onclick = downloadSVG;
 
-// Draw grid
-const grid = document.createElementNS(ns, "svg");
-const gridSize = side + margin * 2;
-grid.setAttribute("id", "grid");
-grid.setAttribute("xmlns", ns);
-grid.setAttribute("viewBox", `${-margin} ${-margin} ${gridSize} ${gridSize}`);
-grid.style.width = `${gridSize}px`;
-container.append(grid);
-for (let col = 0; col <= segments; col++) {
-  const path = document.createElementNS(ns, "path");
-  const c = col * cell;
-  path.setAttribute("d", `M${c},0,${c},${side}`);
-  grid.append(path);
-}
-for (let row = 0; row <= segments; row++) {
-  const path = document.createElementNS(ns, "path");
-  const r = row * cell;
-  path.setAttribute("d", `M0,${r},${side},${r}`);
-  grid.append(path);
-}
-
 // Draw
 
-// Create SVG
-const svg = document.createElementNS(ns, "svg");
-const size = side + margin * 2;
-svg.setAttribute("xmlns", ns);
-svg.setAttribute("viewBox", `${-margin} ${-margin} ${size} ${size}`);
-svg.style.width = `${size}px`;
-container.append(svg);
+// Create group
+const g = document.createElementNS(ns, "g");
+g.setAttribute("id", "symbol");
+svg.append(g);
 
 // Draw each line
-// For each step
 for (let i = 0; i <= steps; i++) {
   // Get value between 0 and 1
   const t = (1 / steps) * i;
 
+  // Get blended line
   const current = interpolator(t);
 
   // Create path
@@ -148,10 +137,11 @@ for (let i = 0; i <= steps; i++) {
   path.setAttribute("d", `M${current.coords}`);
   path.setAttribute("stroke", current.color);
   path.setAttribute("stroke-width", thickness);
-  svg.append(path);
+  g.append(path);
 }
 
 // Create coordinate aliases
+/*
 const A = [from.coords[0], from.coords[1]];
 const A_ = [to.coords[0], to.coords[1]];
 const B = [from.coords[2], from.coords[3]];
@@ -206,3 +196,4 @@ if (curve === "no curve") {
   path2.setAttribute("stroke-width", 1);
   svg.append(path2);
 }
+*/

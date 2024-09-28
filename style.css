@@ -2,30 +2,14 @@
   position: relative;
 }
 
-#grid {
-  display: block;
-  left: 50%;
-  position: absolute;
-  top: 50%;
-  translate: -50% -50%;
-  z-index: -1;
-}
-
-#grid path {
-  stroke: cyan;
-  stroke-width: 1;
-}
-
-svg:not(#grid) {
+#logo {
   display: block;
   margin: 48px auto;
+  outline: 1px solid gray;
+  width: 600px;
+  height: 300px;
 }
 
 body {
   text-align: center;
-}
-
-text {
-  font-size: 10px;
-  font-family: sans-serif;
 }
