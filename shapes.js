@@ -12,10 +12,11 @@ const container = document.querySelector("#container");
 const format = "svg"; // TODO: add "png" support
 const side = 168;
 const margin = 24;
-const steps = 255;
+const steps = 1;
 const segments = 6;
-const thickness = 1;
+const half = segments / 2;
 const cell = side / segments;
+const thickness = 1;
 
 // Default logo
 const from = {
@@ -30,7 +31,6 @@ const to = {
 // Randomize Coordinates
 function randomizeCoords() {
   // Corners (Smallest Second Half) Random
-  const half = segments / 2;
   const regions = [
     d3.randomInt(0, half + 1),
     d3.randomInt(half + 2, segments + 1),
@@ -55,6 +55,38 @@ function randomizeCoords() {
 }
 
 randomizeCoords();
+
+console.log(from.coords);
+
+function findIntersection(from, to) {
+  // Coordinates of the two lines
+  let x1 = from[0],
+    y1 = from[1],
+    x2 = from[2],
+    y2 = from[3];
+  let x3 = to[0],
+    y3 = to[1],
+    x4 = to[2],
+    y4 = to[3];
+
+  // Calculate the denominator
+  let denominator = (x1 - x2) * (y3 - y4) - (y1 - y2) * (x3 - x4);
+
+  // If denominator is 0, the lines are parallel or coincident
+  if (denominator === 0) {
+    return null; // No intersection
+  }
+
+  // Calculate the intersection point
+  let x =
+    ((x1 * y2 - y1 * x2) * (x3 - x4) - (x1 - x2) * (x3 * y4 - y3 * x4)) /
+    denominator;
+  let y =
+    ((x1 * y2 - y1 * x2) * (y3 - y4) - (y1 - y2) * (x3 * y4 - y3 * x4)) /
+    denominator;
+
+  return [x, y];
+}
 
 // Reset drawing
 function clear() {
@@ -127,7 +159,6 @@ for (let i = 0; i <= steps; i++) {
 }
 
 // Draw Letters (for Debugging)
-
 const coords = [...from.coords, ...to.coords];
 ["A", "B", "A'", "B'"].forEach((letter, index) => {
   const start = index * 2;
@@ -141,3 +172,11 @@ const coords = [...from.coords, ...to.coords];
 
   svg.append(text);
 });
+
+// Draw Intersection (for Debugging)
+const intersection = findIntersection(from.coords, to.coords);
+const circle = document.createElementNS(ns, "circle");
+circle.setAttribute("cx", intersection[0]);
+circle.setAttribute("cy", intersection[1]);
+circle.setAttribute("r", 2);
+svg.append(circle);
