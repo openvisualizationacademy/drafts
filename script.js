@@ -16,6 +16,7 @@ const segments = 6;
 const half = segments / 2;
 const cell = side / segments;
 const thickness = 1;
+const orientation = Math.random() > 0.5 ? "horizontal" : "vertical";
 
 // Default logo
 const from = {
@@ -123,6 +124,12 @@ download.onclick = downloadSVG;
 const g = document.createElementNS(ns, "g");
 g.setAttribute("id", "symbol");
 svg.append(g);
+
+if (orientation === "vertical") {
+  const x = offsetX + side / 2;
+  const y = offsetY + side / 2;
+  g.setAttribute("transform", `rotate(90 ${x} ${y})`);
+}
 
 // Draw each line
 for (let i = 0; i <= steps; i++) {
