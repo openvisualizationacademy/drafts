@@ -1,7 +1,5 @@
 import * as d3 from "https://cdn.jsdelivr.net/npm/d3@7/+esm";
 
-// TODO: ACTUALLY CREATE SHAPES VERSION
-
 // Namespace
 const ns = "http://www.w3.org/2000/svg";
 
@@ -9,7 +7,6 @@ const ns = "http://www.w3.org/2000/svg";
 const container = document.querySelector("#container");
 
 // Options
-const format = "svg"; // TODO: add "png" support
 const side = 168;
 const margin = 24;
 const steps = 255;
@@ -95,13 +92,6 @@ function getCurvePosition() {
 }
 
 const curve = getCurvePosition();
-
-console.log(curve);
-
-// Reset drawing
-// function clear() {
-//   container.replaceChildren();
-// }
 
 // Download SVG
 function downloadSVG() {
@@ -216,25 +206,3 @@ if (curve === "no curve") {
   path2.setAttribute("stroke-width", 1);
   svg.append(path2);
 }
-
-// Draw Letters (for Debugging)
-const coords = [...from.coords, ...to.coords];
-["A", "B", "A'", "B'"].forEach((letter, index) => {
-  const start = index * 2;
-  const x = coords[start];
-  const y = coords[start + 1];
-
-  const text = document.createElementNS(ns, "text");
-  text.innerHTML = letter;
-  text.setAttribute("x", x);
-  text.setAttribute("y", y);
-
-  svg.append(text);
-});
-
-// Draw Intersection (for Debugging)
-const circle = document.createElementNS(ns, "circle");
-circle.setAttribute("cx", I[0]);
-circle.setAttribute("cy", I[1]);
-circle.setAttribute("r", 3);
-svg.append(circle);
