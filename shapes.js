@@ -12,7 +12,7 @@ const container = document.querySelector("#container");
 const format = "svg"; // TODO: add "png" support
 const side = 168;
 const margin = 24;
-const steps = 1;
+const steps = 255;
 const segments = 6;
 const half = segments / 2;
 const cell = side / segments;
@@ -168,17 +168,17 @@ const B_ = [to.coords[2], to.coords[3]];
 
 // Draw Shape connecting A, I, A'
 const path1 = document.createElementNS(ns, "path");
-path1.setAttribute("d", `M${A},${I},${A_}Z`);
+path1.setAttribute("d", `M ${A} ${I} ${A_} Z`);
 path1.setAttribute("stroke", "black");
-path1.setAttribute("fill", "rgba(0,0,0,.25)");
+path1.setAttribute("fill", "rgba(0,0,0,0)");
 path1.setAttribute("stroke-width", 1);
 svg.append(path1);
 
-// Draw Shape connecting B', B, A'
+// Draw Shape connecting B', B, A', with a curve between B and A'
 const path2 = document.createElementNS(ns, "path");
-path2.setAttribute("d", `M${B_},${B},${A_}Z`);
+path2.setAttribute("d", `M ${B_} ${B} C ${I} ${I} ${A_} Z`);
 path2.setAttribute("stroke", "black");
-path2.setAttribute("fill", "rgba(0,0,0,.25)");
+path2.setAttribute("fill", "rgba(0,0,0,0)");
 path2.setAttribute("stroke-width", 1);
 svg.append(path2);
 
