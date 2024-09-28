@@ -1,9 +1,13 @@
 import * as d3 from "https://cdn.jsdelivr.net/npm/d3@7/+esm";
 
+// Namespace
+const ns = "http://www.w3.org/2000/svg";
+
 // Parent
 const container = document.querySelector("#container");
 
 // Options
+const format = "svg"; // TODO: add "png" support
 const side = 168;
 const margin = 24;
 const steps = 255;
@@ -23,25 +27,53 @@ const to = {
 };
 
 // Randomize Coordinates
-const generator = d3.randomInt(segments + 1);
-const randomCell = () => generator() * cell;
+function randomizeCoords() {
+  // Naive Random
+  // const generator = d3.randomInt(segments + 1);
+  // const randomCell = () => generator() * cell;
+  // from.coords = [...Array(4)].map(() => randomCell());
+  // to.coords = [...Array(4)].map(() => randomCell());
 
-from.coords = [...Array(4)].map(() => randomCell());
-to.coords = [...Array(4)].map(() => randomCell());
+  // Halves (Quadrants) Random
+  const half = segments / 2;
+  const halves = [
+    d3.randomInt(0, half + 1), // first half
+    d3.randomInt(half, segments + 1), // second half
+  ];
+  // Horizontal Template
+  from.coords = [0, 1, 1, 0];
+  to.coords = [0, 0, 1, 1];
 
-// Namespace
-const ns = "http://www.w3.org/2000/svg";
+  // Fill with values
+  from.coords = from.coords.map((i) => halves[i]() * cell);
+  to.coords = to.coords.map((i) => halves[i]() * cell);
+}
 
-// Reset
-container.replaceChildren();
+randomizeCoords();
+
+// Reset drawing
+function clear() {
+  container.replaceChildren();
+}
+
+// Download SVG
+function downloadSVG() {
+  const blob = new Blob([svg.outerHTML], { type: "image/svg+xml" });
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = "logo.svg";
+  a.click();
+  a.remove();
+}
+
+download.onclick = downloadSVG;
 
 // Draw
 
 // Create SVG
 const svg = document.createElementNS(ns, "svg");
-
 const totalSize = side + margin * 2;
-
+svg.setAttribute("xmlns", ns);
 svg.setAttribute("viewBox", `${-margin} ${-margin} ${totalSize} ${totalSize}`);
 svg.style.width = `${totalSize}px`;
 container.append(svg);
