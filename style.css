@@ -1,5 +1,27 @@
-svg {
-  outline: 1px solid cyan;
-  margin: 48px auto;
+#container {
+  position: relative;
+}
+
+#grid {
   display: block;
+  left: 50%;
+  position: absolute;
+  top: 50%;
+  translate: -50% -50%;
+  z-index: -1;
+}
+
+#grid path {
+  stroke: cyan;
+  stroke-width: 1;
+}
+
+svg:not(#grid) {
+  display: block;
+  margin: 48px auto;
+}
+
+button {
+  display: block;
+  margin: 0 auto;
 }

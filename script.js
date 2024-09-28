@@ -34,6 +34,7 @@ function randomizeCoords() {
   // from.coords = [...Array(4)].map(() => randomCell());
   // to.coords = [...Array(4)].map(() => randomCell());
 
+  /*
   // Halves (Quadrants) Random
   const half = segments / 2;
   const halves = [
@@ -43,7 +44,35 @@ function randomizeCoords() {
   // Horizontal Template
   from.coords = [0, 1, 1, 0];
   to.coords = [0, 0, 1, 1];
+  // Fill with values
+  from.coords = from.coords.map((i) => halves[i]() * cell);
+  to.coords = to.coords.map((i) => halves[i]() * cell);
+  */
 
+  /*
+  // Corners (Quadrants) Random
+  const half = segments / 2;
+  const halves = [
+    d3.randomInt(0, half), // first half
+    d3.randomInt(half + 1, segments + 1), // second half
+  ];
+  // Horizontal Template
+  from.coords = [0, 1, 1, 0];
+  to.coords = [0, 0, 1, 1];
+  // Fill with values
+  from.coords = from.coords.map((i) => halves[i]() * cell);
+  to.coords = to.coords.map((i) => halves[i]() * cell);
+  */
+
+  // Corners (Larger First Half) Random
+  const half = segments / 2;
+  const halves = [
+    d3.randomInt(0, half + 1), // first half
+    d3.randomInt(half + 1, segments + 1), // second half
+  ];
+  // Horizontal Template
+  from.coords = [0, 1, 1, 0];
+  to.coords = [0, 0, 1, 1];
   // Fill with values
   from.coords = from.coords.map((i) => halves[i]() * cell);
   to.coords = to.coords.map((i) => halves[i]() * cell);
@@ -67,6 +96,27 @@ function downloadSVG() {
 }
 
 download.onclick = downloadSVG;
+
+// Draw grid
+const grid = document.createElementNS(ns, "svg");
+const gridSize = side + margin * 2;
+grid.setAttribute("id", "grid");
+grid.setAttribute("xmlns", ns);
+grid.setAttribute("viewBox", `${-margin} ${-margin} ${gridSize} ${gridSize}`);
+grid.style.width = `${gridSize}px`;
+container.append(grid);
+for (let col = 0; col <= segments; col++) {
+  const path = document.createElementNS(ns, "path");
+  const c = col * cell;
+  path.setAttribute("d", `M${c},0,${c},${side}`);
+  grid.append(path);
+}
+for (let row = 0; row <= segments; row++) {
+  const path = document.createElementNS(ns, "path");
+  const r = row * cell;
+  path.setAttribute("d", `M0,${r},${side},${r}`);
+  grid.append(path);
+}
 
 // Draw
 
