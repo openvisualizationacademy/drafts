@@ -140,7 +140,6 @@ container.append(svg);
 const interpolator = d3.interpolate(from, to);
 
 // Draw each line
-
 // For each step
 for (let i = 0; i <= steps; i++) {
   // Get value between 0 and 1
@@ -158,6 +157,31 @@ for (let i = 0; i <= steps; i++) {
   svg.append(path);
 }
 
+// Find intersection
+const I = findIntersection(from.coords, to.coords);
+
+// Create coordinate aliases
+const A = [from.coords[0], from.coords[1]];
+const A_ = [to.coords[0], to.coords[1]];
+const B = [from.coords[2], from.coords[3]];
+const B_ = [to.coords[2], to.coords[3]];
+
+// Draw Shape connecting A, I, A'
+const path1 = document.createElementNS(ns, "path");
+path1.setAttribute("d", `M${A},${I},${A_}Z`);
+path1.setAttribute("stroke", "black");
+path1.setAttribute("fill", "rgba(0,0,0,.25)");
+path1.setAttribute("stroke-width", 1);
+svg.append(path1);
+
+// Draw Shape connecting B', B, A'
+const path2 = document.createElementNS(ns, "path");
+path2.setAttribute("d", `M${B_},${B},${A_}Z`);
+path2.setAttribute("stroke", "black");
+path2.setAttribute("fill", "rgba(0,0,0,.25)");
+path2.setAttribute("stroke-width", 1);
+svg.append(path2);
+
 // Draw Letters (for Debugging)
 const coords = [...from.coords, ...to.coords];
 ["A", "B", "A'", "B'"].forEach((letter, index) => {
@@ -174,7 +198,6 @@ const coords = [...from.coords, ...to.coords];
 });
 
 // Draw Intersection (for Debugging)
-const intersection = findIntersection(from.coords, to.coords);
 const circle = document.createElementNS(ns, "circle");
 circle.setAttribute("cx", intersection[0]);
 circle.setAttribute("cy", intersection[1]);
