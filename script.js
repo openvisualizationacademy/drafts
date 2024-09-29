@@ -16,16 +16,16 @@ const segments = 6;
 const half = segments / 2;
 const cell = side / segments;
 const thickness = 1;
-const orientation = Math.random() > 0.5 ? "horizontal" : "vertical";
+const colors = ["YlOrRd", "YlGnBu", "RdPu"];
+const color = colors[Math.floor(Math.random() * colors.length)];
+const orientation = "horizontal"; // Math.random() > 0.5 ? "horizontal" : "vertical";
 
 // Default logo
 const from = {
   coords: [cell * 1, cell * 5, cell * 6, cell * 1],
-  color: "#f0305d",
 };
 const to = {
   coords: [cell * 0, cell * 3, cell * 5, cell * 6],
-  color: "#ffc20a",
 };
 
 // Randomize Coordinates
@@ -46,7 +46,7 @@ function randomizeCoords() {
 }
 
 // Randomize lines AB and A'B'
-randomizeCoords();
+// randomizeCoords();
 
 // Offset X and Y
 from.coords = from.coords.map(
@@ -56,14 +56,7 @@ to.coords = to.coords.map(
   (value, i) => value + (i % 2 === 0 ? offsetX : offsetY)
 );
 
-// TODO: Randomize color palette
-function randomizeColors() {
-  return;
-}
-
-randomizeColors();
-
-// Create interpolator
+// Create interpolators
 const interpolator = d3.interpolate(from, to);
 
 function findIntersection(from, to) {
@@ -131,6 +124,8 @@ if (orientation === "vertical") {
   g.setAttribute("transform", `rotate(90 ${x} ${y})`);
 }
 
+// svg.style.background = d3[`interpolate${color}`](0);
+
 // Draw each line
 for (let i = 0; i <= steps; i++) {
   // Get value between 0 and 1
@@ -138,11 +133,12 @@ for (let i = 0; i <= steps; i++) {
 
   // Get blended line
   const current = interpolator(t);
+  const stroke = d3[`interpolate${color}`](1 - t * 0.8);
 
   // Create path
   const path = document.createElementNS(ns, "path");
   path.setAttribute("d", `M${current.coords}`);
-  path.setAttribute("stroke", current.color);
+  path.setAttribute("stroke", stroke);
   path.setAttribute("stroke-width", thickness);
   g.append(path);
 }
