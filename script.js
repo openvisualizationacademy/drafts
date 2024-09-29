@@ -46,7 +46,7 @@ function randomizeCoords() {
 }
 
 // Randomize lines AB and A'B'
-// randomizeCoords();
+randomizeCoords();
 
 // Offset X and Y
 from.coords = from.coords.map(
