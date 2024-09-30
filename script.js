@@ -18,7 +18,7 @@ const cell = side / segments;
 const thickness = 1;
 const colors = ["YlOrRd", "YlGnBu", "RdPu"];
 const color = colors[Math.floor(Math.random() * colors.length)];
-const orientation = "horizontal"; // Math.random() > 0.5 ? "horizontal" : "vertical";
+const orientation = Math.random() > 0.5 ? "horizontal" : "vertical";
 
 // Default logo
 const from = {
@@ -27,6 +27,14 @@ const from = {
 const to = {
   coords: [cell * 0, cell * 3, cell * 5, cell * 6],
 };
+
+// Square logo
+// const from = {
+//   coords: [cell * 0, cell * 0, cell * 6, cell * 0],
+// };
+// const to = {
+//   coords: [cell * 0, cell * 6, cell * 6, cell * 6],
+// };
 
 // Randomize Coordinates
 function randomizeCoords() {
@@ -56,8 +64,11 @@ to.coords = to.coords.map(
   (value, i) => value + (i % 2 === 0 ? offsetX : offsetY)
 );
 
-// Create interpolators
+// Create interpolator for coordinates
 const interpolator = d3.interpolate(from, to);
+
+// Create scale for colors
+const scale = d3.scaleLinear().domain([0, 1]).range([0.8, 0.2]);
 
 function findIntersection(from, to) {
   const x1 = from[0],
@@ -89,6 +100,10 @@ function findIntersection(from, to) {
 const I = findIntersection(from.coords, to.coords);
 
 function getCurvePosition() {
+  if (!I) {
+    return "no curve";
+  }
+
   const mid = interpolator(0.5);
   const int = [I[0], 0, I[0], side];
   const corner = findIntersection(mid.coords, int);
@@ -124,8 +139,6 @@ if (orientation === "vertical") {
   g.setAttribute("transform", `rotate(90 ${x} ${y})`);
 }
 
-// svg.style.background = d3[`interpolate${color}`](0);
-
 // Draw each line
 for (let i = 0; i <= steps; i++) {
   // Get value between 0 and 1
@@ -133,7 +146,7 @@ for (let i = 0; i <= steps; i++) {
 
   // Get blended line
   const current = interpolator(t);
-  const stroke = d3[`interpolate${color}`](1 - t * 0.8);
+  const stroke = d3[`interpolate${color}`](scale(t));
 
   // Create path
   const path = document.createElementNS(ns, "path");
