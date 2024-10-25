@@ -7,7 +7,12 @@ const ns = "http://www.w3.org/2000/svg";
 const container = document.querySelector("#container");
 const svg = container.querySelector("#logo");
 
-// Options
+// Get URL params
+const url = new URL(window.location.href);
+const random = url.searchParams.has("random");
+document.body.dataset.random = random;
+
+// Constant options
 const offsetX = 60;
 const offsetY = 48;
 const side = 168;
@@ -17,16 +22,21 @@ const half = segments / 2;
 const cell = side / segments;
 const thickness = 1;
 const colors = ["YlOrRd", "YlGnBu", "RdPu"];
-const color = colors[Math.floor(Math.random() * colors.length)];
-const orientation = Math.random() > 0.5 ? "horizontal" : "vertical";
+const orientations = ["horizontal", "vertical"];
+
+// Variable Options (with defaults)
+let color = colors[0];
+let orientation = orientations[0];
+let from = { coords: [cell * 1, cell * 5, cell * 6, cell * 1] };
+let to = { coords: [cell * 0, cell * 3, cell * 5, cell * 6] };
 
 // Default logo
-const from = {
-  coords: [cell * 1, cell * 5, cell * 6, cell * 1],
-};
-const to = {
-  coords: [cell * 0, cell * 3, cell * 5, cell * 6],
-};
+// const from = {
+//   coords: [cell * 1, cell * 5, cell * 6, cell * 1],
+// };
+// const to = {
+//   coords: [cell * 0, cell * 3, cell * 5, cell * 6],
+// };
 
 // Square logo
 // const from = {
@@ -36,7 +46,7 @@ const to = {
 //   coords: [cell * 0, cell * 6, cell * 6, cell * 6],
 // };
 
-// Randomize Coordinates
+// Randomize lines AB and A'B'
 function randomizeCoords() {
   // Corners (Smallest Second Half) Random
   const regions = [
@@ -53,8 +63,19 @@ function randomizeCoords() {
   to.coords = to.coords.map((i) => regions[i]() * cell);
 }
 
-// Randomize lines AB and A'B'
-randomizeCoords();
+function randomizeColors() {
+  color = colors[Math.floor(Math.random() * colors.length)];
+}
+
+function randomizeOrientation() {
+  orientation = orientations[Math.floor(Math.random() * orientations.length)];
+}
+
+if (random) {
+  randomizeCoords();
+  randomizeColors();
+  randomizeOrientation();
+}
 
 // Offset X and Y
 from.coords = from.coords.map(
@@ -138,6 +159,10 @@ if (orientation === "vertical") {
   const y = offsetY + side / 2;
   g.setAttribute("transform", `rotate(90 ${x} ${y})`);
 }
+
+console.log(d3[`interpolate${color}`](scale(0)));
+console.log(d3[`interpolate${color}`](scale(0.5)));
+console.log(d3[`interpolate${color}`](scale(1)));
 
 // Draw each line
 for (let i = 0; i <= steps; i++) {

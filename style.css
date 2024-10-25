@@ -1,3 +1,26 @@
+:root {
+  --paper: rgb(255, 255, 255);
+  --accent-Yl: rgb(254, 224, 135);
+  --accent-Or: rgb(253, 137, 60);
+  --accent-Rd: rgb(211, 17, 33);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background: var(--paper);
+  font-family: sans-serif;
+  margin: 0;
+  text-align: center;
+}
+
+a,
+button {
+  all: unset;
+}
+
 #container {
   position: relative;
 }
@@ -5,11 +28,65 @@
 #logo {
   display: block;
   margin: 48px auto;
-  outline: 1px solid gray;
-  width: 100%;
   max-width: 600px;
+  outline: 1px solid #ddd;
+  width: 100%;
 }
 
-body {
-  text-align: center;
+.button {
+  align-items: center;
+  background: transparent;
+  border: 2px solid black;
+  background: black;
+  border-radius: 8px;
+  color: white;
+  cursor: pointer;
+  display: flex;
+  font-weight: bold;
+  gap: 0.5em;
+  justify-content: center;
+  padding: 0.75em 1em;
+}
+
+.button:hover {
+  opacity: 0.8;
+}
+
+.button:focus-visible {
+  outline: 4px solid var(--accent-Or);
+  outline-offset: 0px;
+}
+
+.button.tab {
+  background: transparent;
+  color: black;
+  border: 2px solid transparent;
+  border-radius: 9999px;
+  /* border-radius: 8px 8px 0 0; */
+  /* border-bottom: 4px solid transparent; */
+}
+
+.button.tab:hover {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.button svg {
+  width: 16px;
+}
+
+body[data-random="false"] a[href="./"],
+body[data-random="true"] a[href="./?random"] {
+  border-color: currentColor;
+}
+
+nav {
+  /* background: var(--accent-Yl); */
+  gap: 0.5em;
+  display: flex;
+  justify-content: center;
+  padding: 2em 1em 0;
+}
+
+#download {
+  margin: 0 auto;
 }

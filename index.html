@@ -8,13 +8,19 @@
     <script src="script.js" type="module"></script>
   </head>
   <body>
-    <button onclick="location.reload()">Refresh</button>
-    <button id="download">Download SVG</button>
+    
+    <nav>
+      <a class="button tab" href="./">Original</a>
+      <a class="button tab" href="./?random">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="feather feather-refresh-cw"><polyline points="23 4 23 10 17 10"></polyline><polyline points="1 20 1 14 7 14"></polyline><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path></svg>
+        Random
+      </a>
+    </nav>
 
     <div id="container">
       <svg id="logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 300">
 
-        <!-- <rect x="60" y="48" width="168" height="168" fill="cyan" /> -->
+        <rect x="60" y="48" width="168" height="168" fill="none" />
 
         <g id="ova">
           <path d="M264.6435546875,171.2578125l-13.5,32.7421875h6.6328125l3.1640625-7.96875h14.5546875l3.3984375,7.96875h6.6796875l-14.4609375-32.7421875h-6.46875ZM262.8623046875,191.2265625l5.0390625-12.9609375,5.53125,12.9609375h-10.5703125Z"/>
@@ -64,5 +70,8 @@
         </g>
       </svg>
     </div>
+
+    <button class="button" id="download">Download SVG</button>
+
   </body>
 </html>
