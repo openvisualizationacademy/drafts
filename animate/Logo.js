@@ -7,11 +7,12 @@ export default class Logo {
       parent: document.body,
       side: 168,
       margin: 24,
-      steps: 256,
+      steps: 256 / 6,
       pixelRatio: 4,
       segments: 6,
+      decays: [4, 6, 8, 10],
       ranges: [
-        [0, 4],
+        [0, 3],
         [5, 6],
       ],
       templates: [
@@ -20,10 +21,18 @@ export default class Logo {
           from: [0, 1, 1, 0], // 0 means ranges[0], 1 means ranges[1]
           to: [0, 0, 1, 1],
         },
+        {
+          from: [0, 0, 1, 1],
+          to: [0, 1, 1, 0],
+        },
         // vertical
         {
           from: [0, 0, 1, 1],
           to: [1, 0, 0, 1],
+        },
+        {
+          from: [1, 0, 0, 1],
+          to: [0, 0, 1, 1],
         },
       ],
       format: "png", // '(png|svg)'
@@ -121,11 +130,11 @@ export default class Logo {
     // Calculate in-transition “from” and “to” values so they get closer to target values
     this.current.from.coords.forEach((currentCoord, i, arr) => {
       const targetCoord = this.target.from.coords[i];
-      arr[i] = this.expDecay(currentCoord, targetCoord);
+      arr[i] = this.expDecay(currentCoord, targetCoord, this.decays[i]);
     });
     this.current.to.coords.forEach((currentCoord, i, arr) => {
       const targetCoord = this.target.to.coords[i];
-      arr[i] = this.expDecay(currentCoord, targetCoord);
+      arr[i] = this.expDecay(currentCoord, targetCoord, this.decays[i]);
     });
 
     // Define interpolator for current “from“ and “to” values
