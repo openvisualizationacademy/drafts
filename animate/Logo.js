@@ -108,17 +108,22 @@ export default class Logo {
   updateSVG() {}
 
   setup() {
+    this.lastTime = 0;
+    this.deltaTime = 0;
+
     if (this.format === "png") this.setupCanvas();
     if (this.format === "svg") this.setupSVG();
   }
 
   update(ms) {
-    // console.log(ms);
+    // Get time elapsed since last frame
+    this.deltaTime = ms - this.lastTime;
+    this.lastTime = ms;
 
     if (this.format === "png") this.updateCanvas();
     if (this.format === "svg") this.updateSVG();
 
     // Run update for every frame
-    // window.requestAnimationFrame((ms) => this.update(ms));
+    window.requestAnimationFrame((ms) => this.update(ms));
   }
 }
