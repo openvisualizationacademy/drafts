@@ -7,7 +7,6 @@ export default class Logo {
       parent: document.body,
       side: 168,
       margin: 24,
-      steps: 256 / 6,
       pixelRatio: 4,
       segments: 6,
       decays: [4, 6, 8, 10],
@@ -95,31 +94,32 @@ export default class Logo {
     this.parent.append(this.canvas);
   }
 
+  drawLine(x1, y1, x2, y2) {
+    this.context.beginPath();
+    this.context.moveTo(x1, y1);
+    this.context.lineTo(x2, y2);
+    this.context.stroke();
+  }
+
   drawGrid() {
     const cell = (this.side / this.segments) * this.pixelRatio;
+    const length = this.side * this.pixelRatio;
+
+    // Define stroke thickness
+    this.context.lineWidth = 1 * this.pixelRatio;
+
+    // Define stroke color
+    this.context.strokeStyle = "#d3d3d3";
 
     // Draw lines for each segment
     for (let i = 0; i <= this.segments; i++) {
-      // Define stroke thickness
-      this.context.lineWidth = 1 * this.pixelRatio;
-
-      // Define stroke color
-      this.context.strokeStyle = "#d3d3d3";
-
       // Draw vertical line
-      this.context.beginPath();
-      this.context.moveTo(i * cell, 0);
-      this.context.lineTo(i * cell, this.side * this.pixelRatio);
-      this.context.stroke();
+      this.drawLine(i * cell, 0, i * cell, length);
 
       // Draw horizontal line
-      this.context.beginPath();
-      this.context.moveTo(0, i * cell);
-      this.context.lineTo(this.side * this.pixelRatio, i * cell);
-      this.context.stroke();
+      this.drawLine(0, i * cell, length, i * cell);
     }
   }
-
   updateCanvas() {
     // Reset translation
     this.context.resetTransform();
@@ -128,13 +128,13 @@ export default class Logo {
     this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
     // Calculate in-transition “from” and “to” values so they get closer to target values
-    this.current.from.coords.forEach((currentCoord, i, arr) => {
-      const targetCoord = this.target.from.coords[i];
-      arr[i] = this.expDecay(currentCoord, targetCoord, this.decays[i]);
+    this.current.from.coords.forEach((a, i, arr) => {
+      const b = this.target.from.coords[i];
+      arr[i] = this.expDecay(a, b, this.decays[i]);
     });
-    this.current.to.coords.forEach((currentCoord, i, arr) => {
-      const targetCoord = this.target.to.coords[i];
-      arr[i] = this.expDecay(currentCoord, targetCoord, this.decays[i]);
+    this.current.to.coords.forEach((a, i, arr) => {
+      const b = this.target.to.coords[i];
+      arr[i] = this.expDecay(a, b, this.decays[i]);
     });
 
     // Define interpolator for current “from“ and “to” values
@@ -154,33 +154,28 @@ export default class Logo {
     }
 
     // Draw a line for each step
-    for (let i = 0; i < this.steps; i++) {
+    for (let i = 0; i < this.current.steps; i++) {
       // Get value between 0 and 1
-      const t = (1 / this.steps) * i;
+      const t = (1 / this.current.steps) * i;
 
       // Find values for the current step
-      const step = this.interpolator(t);
+      const blend = this.interpolator(t);
 
       // Adjust those values based on sizes and resolution
-      step.coords = step.coords.map(
+      blend.coords = blend.coords.map(
         (coord) => coord * (this.side / this.segments) * this.pixelRatio
       );
 
       // Define stroke thickness
-      this.context.lineWidth = step.thickness * this.pixelRatio;
+      this.context.lineWidth = blend.thickness * this.pixelRatio;
 
       // Define stroke color
       this.context.strokeStyle = d3[`interpolate${this.current.palette}`](
         this.colorAdjusted(t)
       );
 
-      // Begin new line
-      this.context.beginPath();
-      this.context.moveTo(step.coords[0], step.coords[1]);
-      this.context.lineTo(step.coords[2], step.coords[3]);
-
-      // Draw line
-      this.context.stroke();
+      // Draw blended line
+      this.drawLine(...blend.coords);
     }
   }
 
@@ -224,12 +219,13 @@ export default class Logo {
 
     const options = {
       palette: "YlGnBu",
+      steps: this.randomInt(2, 256),
       from: {
-        coords: template.from,
+        coords: template.from.map((i) => this.randomInt(...this.ranges[i])),
         thickness: 1,
       },
       to: {
-        coords: template.to,
+        coords: template.to.map((i) => this.randomInt(...this.ranges[i])),
         thickness: 1,
       },
     };
@@ -240,12 +236,12 @@ export default class Logo {
     // ];
 
     // Fill with values
-    options.from.coords = options.from.coords.map((i) =>
-      this.randomInt(...this.ranges[i])
-    );
-    options.to.coords = options.to.coords.map((i) =>
-      this.randomInt(...this.ranges[i])
-    );
+    // options.from.coords = options.from.coords.map((i) =>
+    //   this.randomInt(...this.ranges[i])
+    // );
+    // options.to.coords = options.to.coords.map((i) =>
+    //   this.randomInt(...this.ranges[i])
+    // );
     // options.to.coords = options.to.coords.map((i) => regions[i]());
 
     this.target = options;
