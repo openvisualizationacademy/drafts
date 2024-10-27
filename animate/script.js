@@ -1,3 +1,7 @@
 import Logo from "./Logo.js";
 
-const logo = new Logo();
+window.logo = new Logo();
+
+document.onclick = () => {
+  window.logo.randomizeTarget();
+};
