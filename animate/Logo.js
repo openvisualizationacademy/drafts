@@ -9,11 +9,13 @@ export default class Logo {
       margin: 24,
       pixelRatio: 4,
       segments: 6,
-      decays: [4, 6, 8, 10],
+      thickness: 1,
+      decays: [6, 8, 10, 12],
       ranges: [
         [0, 3],
         [5, 6],
       ],
+
       templates: [
         // horizontal
         {
@@ -43,11 +45,9 @@ export default class Logo {
         steps: 256,
         from: {
           coords: [1, 5, 6, 1],
-          thickness: 1,
         },
         to: {
           coords: [0, 3, 5, 6],
-          thickness: 1,
         },
       },
     };
@@ -127,7 +127,7 @@ export default class Logo {
     // Clear canvas
     this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
-    // Calculate in-transition “from” and “to” values so they get closer to target values
+    // Calculate in-transition “from” and “to” values so they get closer to target
     this.current.from.coords.forEach((a, i, arr) => {
       const b = this.target.from.coords[i];
       arr[i] = this.expDecay(a, b, this.decays[i]);
@@ -137,11 +137,14 @@ export default class Logo {
       arr[i] = this.expDecay(a, b, this.decays[i]);
     });
 
+    // Calculate in-transition step count so it gets closer to target
+    this.current.steps = this.expDecay(this.current.steps, this.target.steps);
+
     // Define interpolator for current “from“ and “to” values
     this.interpolator = d3.interpolate(this.current.from, this.current.to);
 
-    // Define colors scale and range
-    this.colorAdjusted = d3.scaleLinear().domain([0, 1]).range([0.8, 0.2]);
+    // Define scale for colors scale and range
+    this.colorScale = d3.scaleLinear().domain([0, 1]).range([0.8, 0.2]);
 
     // Account for margins when drawing
     this.context.translate(
@@ -167,11 +170,11 @@ export default class Logo {
       );
 
       // Define stroke thickness
-      this.context.lineWidth = blend.thickness * this.pixelRatio;
+      this.context.lineWidth = this.thickness * this.pixelRatio;
 
       // Define stroke color
       this.context.strokeStyle = d3[`interpolate${this.current.palette}`](
-        this.colorAdjusted(t)
+        this.colorScale(t)
       );
 
       // Draw blended line
@@ -219,30 +222,16 @@ export default class Logo {
 
     const options = {
       palette: "YlGnBu",
-      steps: this.randomInt(2, 256),
+      steps: this.randomInt(8, 256),
       from: {
         coords: template.from.map((i) => this.randomInt(...this.ranges[i])),
-        thickness: 1,
+        // thickness: this.randomInt(1, 4),
       },
       to: {
         coords: template.to.map((i) => this.randomInt(...this.ranges[i])),
-        thickness: 1,
+        // thickness: this.randomInt(1, 4),
       },
     };
-
-    // const regions = [
-    //   d3.randomInt(...this.ranges[0]),
-    //   d3.randomInt(...this.ranges[1]),
-    // ];
-
-    // Fill with values
-    // options.from.coords = options.from.coords.map((i) =>
-    //   this.randomInt(...this.ranges[i])
-    // );
-    // options.to.coords = options.to.coords.map((i) =>
-    //   this.randomInt(...this.ranges[i])
-    // );
-    // options.to.coords = options.to.coords.map((i) => regions[i]());
 
     this.target = options;
   }
