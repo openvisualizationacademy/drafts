@@ -7,14 +7,32 @@ export default class Logo {
       parent: document.body,
       side: 168,
       margin: 24,
-      steps: 256 / 4,
-      segments: 6,
+      steps: 256,
       pixelRatio: 4,
-      format: "png", // 'svg'
+      segments: 6,
+      ranges: [
+        [0, 4],
+        [5, 6],
+      ],
+      templates: [
+        // horizontal
+        {
+          from: [0, 1, 1, 0], // 0 means ranges[0], 1 means ranges[1]
+          to: [0, 0, 1, 1],
+        },
+        // vertical
+        {
+          from: [0, 0, 1, 1],
+          to: [1, 0, 0, 1],
+        },
+      ],
+      format: "png", // '(png|svg)'
       palettes: ["YlOrRd", "YlGnBu", "RdPu"],
+      grid: true,
 
       original: {
         palette: "YlOrRd",
+        steps: 256,
         from: {
           coords: [1, 5, 6, 1],
           thickness: 1,
@@ -26,10 +44,18 @@ export default class Logo {
       },
     };
 
+    // Copy original symbol as the current one
     this.defaults.current = structuredClone(this.defaults.original);
 
     // Merge provided options with defaults
     Object.assign(this, this.defaults, options);
+
+    // Create properties to keep track of time elapsed
+    this.lastTime = 0;
+    this.deltaTime = 0;
+
+    // Set initial target state
+    this.setTarget();
 
     // Run setup once
     this.setup();
@@ -60,6 +86,31 @@ export default class Logo {
     this.parent.append(this.canvas);
   }
 
+  drawGrid() {
+    const cell = (this.side / this.segments) * this.pixelRatio;
+
+    // Draw lines for each segment
+    for (let i = 0; i <= this.segments; i++) {
+      // Define stroke thickness
+      this.context.lineWidth = 1 * this.pixelRatio;
+
+      // Define stroke color
+      this.context.strokeStyle = "#d3d3d3";
+
+      // Draw vertical line
+      this.context.beginPath();
+      this.context.moveTo(i * cell, 0);
+      this.context.lineTo(i * cell, this.side * this.pixelRatio);
+      this.context.stroke();
+
+      // Draw horizontal line
+      this.context.beginPath();
+      this.context.moveTo(0, i * cell);
+      this.context.lineTo(this.side * this.pixelRatio, i * cell);
+      this.context.stroke();
+    }
+  }
+
   updateCanvas() {
     // Reset translation
     this.context.resetTransform();
@@ -88,6 +139,10 @@ export default class Logo {
       this.margin * this.pixelRatio,
       this.margin * this.pixelRatio
     );
+
+    if (this.grid) {
+      this.drawGrid();
+    }
 
     // Draw a line for each step
     for (let i = 0; i < this.steps; i++) {
@@ -125,13 +180,6 @@ export default class Logo {
   updateSVG() {}
 
   setup() {
-    // Create properties to keep track of time elapsed
-    this.lastTime = 0;
-    this.deltaTime = 0;
-
-    // Set initial target state
-    this.setTarget();
-
     if (this.format === "png") this.setupCanvas();
     if (this.format === "svg") this.setupSVG();
   }
@@ -148,35 +196,48 @@ export default class Logo {
     window.requestAnimationFrame((ms) => this.update(ms));
   }
 
+  randomInt(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  }
+
+  randomItem(array) {
+    return array[Math.floor(Math.random() * array.length)];
+  }
+
   resetTarget() {
     this.target = this.defaults.current;
   }
 
   // TODO: Randomize colors (and thickness as well?)
   randomizeTarget() {
+    // Get random template (regions where a line and start and end)
+    const template = this.randomItem(this.templates);
+
     const options = {
       palette: "YlGnBu",
       from: {
-        coords: [0, 1, 1, 0],
+        coords: template.from,
         thickness: 1,
       },
       to: {
-        coords: [0, 0, 1, 1],
+        coords: template.to,
         thickness: 1,
       },
     };
 
-    const half = this.segments / 2;
-
-    // Corners (Smallest Second Half) Random
-    const regions = [
-      d3.randomInt(0, half + 1),
-      d3.randomInt(half + 2, this.segments + 1),
-    ];
+    // const regions = [
+    //   d3.randomInt(...this.ranges[0]),
+    //   d3.randomInt(...this.ranges[1]),
+    // ];
 
     // Fill with values
-    options.from.coords = options.from.coords.map((i) => regions[i]());
-    options.to.coords = options.to.coords.map((i) => regions[i]());
+    options.from.coords = options.from.coords.map((i) =>
+      this.randomInt(...this.ranges[i])
+    );
+    options.to.coords = options.to.coords.map((i) =>
+      this.randomInt(...this.ranges[i])
+    );
+    // options.to.coords = options.to.coords.map((i) => regions[i]());
 
     this.target = options;
   }
