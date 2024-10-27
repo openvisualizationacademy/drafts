@@ -3,20 +3,31 @@ import * as d3 from "https://cdn.jsdelivr.net/npm/d3@7/+esm";
 export default class Logo {
   constructor(options = {}) {
     // Define default options
-    const defaults = {
+    this.defaults = {
       parent: document.body,
       side: 168,
       margin: 24,
-      steps: 3, // 255,
+      steps: 256,
       segments: 6,
-      thickness: 10, // TODO: add to from/to object so it can be animated?
-      // cell: side / segments,
-      pixelRatio: 4, // window.devicePixelRatio
+      pixelRatio: 4,
       format: "png", // 'svg'
+      palettes: ["YlOrRd", "YlGnBu", "RdPu"],
+
+      current: {
+        palette: "YlOrRd",
+        from: {
+          coords: [1, 5, 6, 1],
+          thickness: 1,
+        },
+        to: {
+          coords: [0, 3, 5, 6],
+          thickness: 1,
+        },
+      },
     };
 
     // Merge provided options with defaults
-    Object.assign(this, defaults, options);
+    Object.assign(this, this.defaults, options);
 
     // Run setup once
     this.setup();
@@ -40,7 +51,6 @@ export default class Logo {
     this.canvas.height = width * this.pixelRatio;
 
     this.canvas.style.width = `${width}px`;
-    this.canvas.style.height = `${height}px`;
 
     // Account for margins when drawing
     this.context.translate(
@@ -56,18 +66,37 @@ export default class Logo {
     // Clear canvas
     this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
+    // Define interpolator for current “from“ and “to” values
+    this.interpolator = d3.interpolate(this.current.from, this.current.to);
+
+    // Define colors scale and range
+    this.colorAdjusted = d3.scaleLinear().domain([0, 1]).range([0.8, 0.2]);
+
     // Draw a line for each step
-    for (let step = 0; step < this.steps; step++) {
+    for (let i = 0; i < this.steps; i++) {
+      // Get value between 0 and 1
+      const t = (1 / this.steps) * i;
+
+      // Find values for the current step
+      const step = this.interpolator(t);
+
+      // Adjust those values based on sizes and resolution
+      step.coords = step.coords.map(
+        (coord) => coord * (this.side / this.segments) * this.pixelRatio
+      );
+
       // Define stroke thickness
-      this.context.lineWidth = this.thickness * this.pixelRatio;
+      this.context.lineWidth = step.thickness * this.pixelRatio;
+
+      // Define stroke color
+      this.context.strokeStyle = d3[`interpolate${this.current.palette}`](
+        this.colorAdjusted(t)
+      );
 
       // Begin new line
       this.context.beginPath();
-      this.context.moveTo(0, 0);
-      this.context.lineTo(
-        this.side * this.pixelRatio,
-        this.side * this.pixelRatio
-      );
+      this.context.moveTo(step.coords[0], step.coords[1]);
+      this.context.lineTo(step.coords[2], step.coords[3]);
 
       // Draw line
       this.context.stroke();
@@ -84,12 +113,12 @@ export default class Logo {
   }
 
   update(ms) {
-    console.log(ms);
+    // console.log(ms);
 
     if (this.format === "png") this.updateCanvas();
     if (this.format === "svg") this.updateSVG();
 
     // Run update for every frame
-    window.requestAnimationFrame((ms) => this.update(ms));
+    // window.requestAnimationFrame((ms) => this.update(ms));
   }
 }
