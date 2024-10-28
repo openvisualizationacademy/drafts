@@ -3,17 +3,29 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Animate Open Visualizaation Academy Logo</title>
+  <title>Animated Logo | Open Visualization Academy</title>
   <script src="script.js" type="module"></script>
   <style>
+    body {
+      text-align: center;
+    }
+
+    .logo {
+      margin: 32px;
+    }
+
     canvas {
       outline: 1px solid gray;
-      margin: auto;
-      display: block;
     }
   </style>
 </head>
 <body>
+
+  <button onclick="logo.resetTarget()">Original</button>
+  <button onclick="logo.randomizeTarget()">Randomize</button>
+
   <div class="logo"></div>
+
+  
 </body>
 </html>

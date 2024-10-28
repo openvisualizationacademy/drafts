@@ -36,7 +36,7 @@ export default class Logo {
           to: [0, 0, 1, 1],
         },
       ],
-      format: "png", // '(png|svg)'
+      format: "png", // TODO: Support svg
       palettes: ["YlOrRd", "YlGnBu", "RdPu"],
       grid: true,
 
@@ -57,6 +57,11 @@ export default class Logo {
 
     // Merge provided options with defaults
     Object.assign(this, this.defaults, options);
+
+    // Handle parents provided as CSS selector strings
+    if (typeof this.parent === "string") {
+      this.parent = document.querySelector(this.parent);
+    }
 
     // Create properties to keep track of time elapsed
     this.lastTime = 0;
@@ -113,11 +118,14 @@ export default class Logo {
 
     // Draw lines for each segment
     for (let i = 0; i <= this.segments; i++) {
+      // Get current column and row
+      const point = i * cell;
+
       // Draw vertical line
-      this.drawLine(i * cell, 0, i * cell, length);
+      this.drawLine(point, 0, point, length);
 
       // Draw horizontal line
-      this.drawLine(0, i * cell, length, i * cell);
+      this.drawLine(0, point, length, point);
     }
   }
   updateCanvas() {
@@ -138,7 +146,11 @@ export default class Logo {
     });
 
     // Calculate in-transition step count so it gets closer to target
-    this.current.steps = this.expDecay(this.current.steps, this.target.steps);
+    this.current.steps = this.expDecay(
+      this.current.steps,
+      this.target.steps,
+      this.decays[0]
+    );
 
     // Define interpolator for current “from“ and “to” values
     this.interpolator = d3.interpolate(this.current.from, this.current.to);
@@ -212,7 +224,7 @@ export default class Logo {
   }
 
   resetTarget() {
-    this.target = this.defaults.current;
+    this.target = this.defaults.original;
   }
 
   // TODO: Randomize colors (and thickness as well?)
