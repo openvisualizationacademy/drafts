@@ -173,7 +173,7 @@ export default class Logo {
       this.context.lineWidth = this.thickness * this.pixelRatio;
 
       // Define stroke color
-      this.context.strokeStyle = d3[`interpolate${this.current.palette}`](
+      this.context.strokeStyle = d3[`interpolate${this.target.palette}`](
         this.colorScale(t)
       );
 
@@ -221,7 +221,7 @@ export default class Logo {
     const template = this.randomItem(this.templates);
 
     const options = {
-      palette: "YlGnBu",
+      palette: this.randomItem(this.palettes),
       steps: this.randomInt(8, 256),
       from: {
         coords: template.from.map((i) => this.randomInt(...this.ranges[i])),
