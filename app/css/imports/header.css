@@ -1,0 +1,47 @@
+header {
+  padding: 12px 24px;
+  /* background: pink; */
+}
+
+header nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+header nav .links {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+header nav a {
+  text-decoration: none;
+  color: inherit;
+  padding: 6px 6px;
+}
+
+header nav a:has(.logo) {
+  padding: 0;
+}
+
+header nav a .logo {
+  padding: 4px 8px 4px 0;
+  /* translate: 0 calc(-100% / 6); */
+  /* transition: 0.2s ease-out; */
+}
+
+header nav a:hover .logo {
+  translate: 0 0;
+}
+
+.button.secondary {
+  text-decoration: none;
+  color: inherit;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: black;
+  color: white;
+  display: inline-flex;
+  user-select: none;
+}

@@ -16,7 +16,7 @@ export default class Logo {
         [5, 6],
       ],
 
-      waves: false,
+      wave: false,
 
       templates: [
         // horizontal
@@ -57,10 +57,10 @@ export default class Logo {
         palette: "YlOrRd",
         steps: 255,
         from: {
-          coords: [1, 5, 6, 1],
+          coords: [1, 5 - 0.5, 6, 1 - 0.5],
         },
         to: {
-          coords: [0, 3, 5, 6],
+          coords: [0, 3 - 0.5, 5, 6 - 0.5],
         },
       },
     };
@@ -111,13 +111,15 @@ export default class Logo {
     // Add canvas to page
     this.parent.append(this.canvas);
 
-    // Add hover events
-    this.parent.addEventListener("mouseenter", () => {
-      this.resetTarget("flat");
-    });
-    this.parent.addEventListener("mouseleave", () => {
-      this.resetTarget("original");
-    });
+    // Add hover events and prevent triggering it immediatly when page loads
+    setTimeout(() => {
+      this.parent.addEventListener("mouseenter", () => {
+        this.resetTarget("flat");
+      });
+      this.parent.addEventListener("mouseleave", () => {
+        this.resetTarget("original");
+      });
+    }, 100);
   }
 
   drawLine(x1, y1, x2, y2) {
@@ -150,7 +152,7 @@ export default class Logo {
     }
   }
 
-  drawWaves() {
+  drawWave() {
     // TEMP: Fix number of steps
     this.current.steps = 128 - 1;
 
@@ -192,8 +194,8 @@ export default class Logo {
     }
   }
 
-  toggleWaves() {
-    this.waves = !this.waves;
+  toggleWave() {
+    this.wave = !this.wave;
   }
 
   updateCanvas() {
@@ -203,8 +205,8 @@ export default class Logo {
     // Clear canvas
     this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
-    if (this.waves) {
-      this.drawWaves();
+    if (this.wave) {
+      this.drawWave();
       return;
     }
 

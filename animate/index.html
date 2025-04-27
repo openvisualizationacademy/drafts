@@ -16,9 +16,10 @@
       cursor: pointer;
     }
 
-    canvas {
+    .logo canvas {
       outline: 1px solid gray;
       display: block;
+      user-select: none;
     }
   </style>
 </head>
@@ -27,7 +28,6 @@
   <button onclick="logo.resetTarget()">Original</button>
   <button onclick="logo.resetTarget('flat')">Flat</button>
   <button onclick="logo.randomizeTarget()">Randomize</button>
-  <button onclick="logo.autoplay()">Autoplay</button>
   <button onclick="logo.autoplay()">Autoplay</button>
   <label>
     Waves

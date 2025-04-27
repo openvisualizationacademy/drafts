@@ -1,0 +1,18 @@
+.wave {
+  width: fit-content;
+  display: flex;
+  justify-content: end;
+  width: 100%;
+  max-width: calc(168px * 5);
+  margin: 0 auto;
+}
+
+.wave canvas {
+  width: 100% !important;
+  display: block;
+  user-select: none;
+  pointer-events: none;
+  z-index: -1;
+  filter: blur(8px);
+  translate: 12.5%;
+}

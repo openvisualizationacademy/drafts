@@ -1,0 +1,9 @@
+.logo {
+  width: fit-content;
+}
+
+.logo canvas {
+  width: 48px !important;
+  display: block;
+  user-select: none;
+}
