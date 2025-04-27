@@ -38,7 +38,18 @@ export default class Logo {
       ],
       format: "png", // TODO: Support svg
       palettes: ["YlOrRd", "YlGnBu", "RdPu"],
-      grid: true,
+      grid: false,
+
+      flat: {
+        palette: "YlOrRd",
+        steps: 256,
+        from: {
+          coords: [0, 0, 6, 0],
+        },
+        to: {
+          coords: [0, 6, 6, 6],
+        },
+      },
 
       original: {
         palette: "YlOrRd",
@@ -97,6 +108,16 @@ export default class Logo {
 
     // Add canvas to page
     this.parent.append(this.canvas);
+
+    // Add hover events
+
+    this.parent.addEventListener("pointerenter", () => {
+      this.resetTarget("flat");
+    });
+
+    this.parent.addEventListener("pointerleave", () => {
+      this.resetTarget("original");
+    });
   }
 
   drawLine(x1, y1, x2, y2) {
@@ -146,11 +167,7 @@ export default class Logo {
     });
 
     // Calculate in-transition step count so it gets closer to target
-    this.current.steps = this.expDecay(
-      this.current.steps,
-      this.target.steps,
-      this.decays[0]
-    );
+    this.current.steps = this.expDecay(this.current.steps, this.target.steps, this.decays[0]);
 
     // Define interpolator for current “from“ and “to” values
     this.interpolator = d3.interpolate(this.current.from, this.current.to);
@@ -159,10 +176,7 @@ export default class Logo {
     this.colorScale = d3.scaleLinear().domain([0, 1]).range([0.8, 0.2]);
 
     // Account for margins when drawing
-    this.context.translate(
-      this.margin * this.pixelRatio,
-      this.margin * this.pixelRatio
-    );
+    this.context.translate(this.margin * this.pixelRatio, this.margin * this.pixelRatio);
 
     if (this.grid) {
       this.drawGrid();
@@ -177,17 +191,13 @@ export default class Logo {
       const blend = this.interpolator(t);
 
       // Adjust those values based on sizes and resolution
-      blend.coords = blend.coords.map(
-        (coord) => coord * (this.side / this.segments) * this.pixelRatio
-      );
+      blend.coords = blend.coords.map((coord) => coord * (this.side / this.segments) * this.pixelRatio);
 
       // Define stroke thickness
       this.context.lineWidth = this.thickness * this.pixelRatio;
 
       // Define stroke color
-      this.context.strokeStyle = d3[`interpolate${this.target.palette}`](
-        this.colorScale(t)
-      );
+      this.context.strokeStyle = d3[`interpolate${this.target.palette}`](this.colorScale(t));
 
       // Draw blended line
       this.drawLine(...blend.coords);
@@ -223,8 +233,8 @@ export default class Logo {
     return array[Math.floor(Math.random() * array.length)];
   }
 
-  resetTarget() {
-    this.target = this.defaults.original;
+  resetTarget(settings = "original") {
+    this.target = this.defaults[settings];
   }
 
   // TODO: Randomize colors (and thickness as well?)
@@ -234,7 +244,7 @@ export default class Logo {
 
     const options = {
       palette: this.randomItem(this.palettes),
-      steps: this.randomInt(8, 256),
+      steps: this.randomInt(256, 256),
       from: {
         coords: template.from.map((i) => this.randomInt(...this.ranges[i])),
         // thickness: this.randomInt(1, 4),
@@ -246,6 +256,28 @@ export default class Logo {
     };
 
     this.target = options;
+  }
+
+  autoplay() {
+    this.grid = false;
+    this.decays = [6, 8, 10, 12].map((decay) => decay * 0.1);
+    this.palettes = ["YlOrRd"];
+
+    this.interval = setInterval(() => this.randomizeTarget(), 4000);
+  }
+
+  downloadPNG() {
+    const dataURL = this.canvas.toDataURL();
+    const a = document.createElement("a");
+    a.href = dataURL;
+    a.download = "logo";
+    a.click();
+    a.remove();
+  }
+
+  download() {
+    if (this.format === "png") this.downloadPNG();
+    if (this.format === "svg") this.downloadSVG();
   }
 
   setTarget(options) {

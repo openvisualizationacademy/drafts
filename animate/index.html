@@ -11,20 +11,27 @@
     }
 
     .logo {
-      margin: 32px;
+      margin: 32px auto;
+      width: fit-content;
+      cursor: pointer;
     }
 
     canvas {
       outline: 1px solid gray;
+      display: block;
     }
   </style>
 </head>
 <body>
 
   <button onclick="logo.resetTarget()">Original</button>
+  <button onclick="logo.resetTarget('flat')">Flat</button>
   <button onclick="logo.randomizeTarget()">Randomize</button>
+  <button onclick="logo.autoplay()">Autoplay</button>
 
   <div class="logo"></div>
+
+  <button onclick="logo.download()">Download</button>
 
   
 </body>
