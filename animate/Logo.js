@@ -16,6 +16,8 @@ export default class Logo {
         [5, 6],
       ],
 
+      waves: false,
+
       templates: [
         // horizontal
         {
@@ -42,7 +44,7 @@ export default class Logo {
 
       flat: {
         palette: "YlOrRd",
-        steps: 256,
+        steps: 255,
         from: {
           coords: [0, 0, 6, 0],
         },
@@ -53,7 +55,7 @@ export default class Logo {
 
       original: {
         palette: "YlOrRd",
-        steps: 256,
+        steps: 255,
         from: {
           coords: [1, 5, 6, 1],
         },
@@ -110,11 +112,9 @@ export default class Logo {
     this.parent.append(this.canvas);
 
     // Add hover events
-
     this.parent.addEventListener("pointerenter", () => {
       this.resetTarget("flat");
     });
-
     this.parent.addEventListener("pointerleave", () => {
       this.resetTarget("original");
     });
@@ -149,12 +149,64 @@ export default class Logo {
       this.drawLine(0, point, length, point);
     }
   }
+
+  drawWaves() {
+    // TEMP: Fix number of steps
+    this.current.steps = 128 - 1;
+
+    this.colorScale = d3.scaleLinear().domain([0, 1]).range([0.2, 0.8]);
+
+    // Draw a line for each step
+    for (let i = 0; i <= this.current.steps; i++) {
+      // Reset translation
+      this.context.resetTransform();
+
+      // Get value between 0 and 1
+      const t = (1 / this.current.steps) * i;
+
+      // Define stroke thickness
+      this.context.lineWidth = (this.thickness * 1.25 + Math.sin(t - this.lastTime * 0.001) * this.thickness) * this.pixelRatio;
+
+      // Translate to account for offsets and pivot for rotation
+      let xOffset = (this.margin + t * this.side) * this.pixelRatio;
+      let yOffset = (this.margin + this.side / 2) * this.pixelRatio;
+      this.context.translate(xOffset, yOffset);
+
+      // Define base coords
+      let coords = [0, this.segments * -0.5, 0, this.segments * 0.5];
+
+      // Decrese length of the lines as they get further away
+      coords[1] += (1 - t) * 1;
+      coords[3] -= (1 - t) * 1;
+
+      // Adjust those values based on sizes and resolution
+      coords = coords.map((coord) => coord * (this.side / this.segments) * this.pixelRatio);
+
+      // Define stroke color
+      this.context.strokeStyle = d3[`interpolate${this.target.palette}`](this.colorScale(t));
+
+      this.context.rotate(Math.cos(Math.pow(t, 1) * 1.5 + this.lastTime * 0.0005) * (Math.PI * 0.75));
+
+      // Draw line
+      this.drawLine(...coords);
+    }
+  }
+
+  toggleWaves() {
+    this.waves = !this.waves;
+  }
+
   updateCanvas() {
     // Reset translation
     this.context.resetTransform();
 
     // Clear canvas
     this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+
+    if (this.waves) {
+      this.drawWaves();
+      return;
+    }
 
     // Calculate in-transition “from” and “to” values so they get closer to target
     this.current.from.coords.forEach((a, i, arr) => {
@@ -183,9 +235,11 @@ export default class Logo {
     }
 
     // Draw a line for each step
-    for (let i = 0; i < this.current.steps; i++) {
+    for (let i = 0; i <= this.current.steps; i++) {
       // Get value between 0 and 1
       const t = (1 / this.current.steps) * i;
+
+      // console.log(t);
 
       // Find values for the current step
       const blend = this.interpolator(t);
@@ -244,7 +298,7 @@ export default class Logo {
 
     const options = {
       palette: this.randomItem(this.palettes),
-      steps: this.randomInt(256, 256),
+      steps: this.randomInt(255, 255),
       from: {
         coords: template.from.map((i) => this.randomInt(...this.ranges[i])),
         // thickness: this.randomInt(1, 4),
@@ -257,6 +311,8 @@ export default class Logo {
 
     this.target = options;
   }
+
+  spin() {}
 
   autoplay() {
     this.grid = false;
