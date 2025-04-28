@@ -3,7 +3,7 @@
 }
 
 .logo canvas {
-  width: 48px !important;
   display: block;
   user-select: none;
+  width: 4.8rem !important;
 }

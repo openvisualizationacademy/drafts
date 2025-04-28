@@ -1,50 +1,47 @@
 @font-face {
+  font-display: swap;
   font-family: "AtkinsonHyperlegibleNextVF";
+  font-style: normal;
+  font-weight: 100 900;
+
   src: url("../../fonts/AtkinsonHyperlegibleNextVF-Variable.woff2") format("woff2 supports variations"),
     url("../../fonts/AtkinsonHyperlegibleNextVF-Variable.woff2") format("woff2-variations");
-  font-weight: 100 900;
-  font-style: normal;
-  font-display: swap;
 }
 
 :root {
   color-scheme: light dark;
 }
 
+html {
+  font-size: 62.5%;
+}
+
 body {
-  font-family: "AtkinsonHyperlegibleNextVF", sans-serif;
-  font-size: 18px;
-  line-height: 1.333333;
-  font-weight: 400;
   background: light-dark(white, black);
   color: light-dark(black, white);
+  font-family: "AtkinsonHyperlegibleNextVF", sans-serif;
+  font-size: 1.8rem;
+  font-weight: 400;
+  line-height: 1.333333;
 }
 
 .button {
-  text-decoration: none;
-  color: inherit;
-  user-select: none;
-  display: inline-flex;
   border-radius: 999px;
+  color: inherit;
+  display: inline-flex;
+  text-decoration: none;
+  user-select: none;
 }
 
 .button.secondary {
-  padding: 6px 12px;
   background: light-dark(black, white);
   color: light-dark(white, black);
+  padding: 0.6rem 1.2rem;
 }
 
 .button.primary {
-  padding: 12px 16px;
   background: light-dark(#f54528, #f54528);
   color: light-dark(white, white);
   font-weight: 500;
+  padding: 1.2rem 1.6rem;
 }
-
-/* .button.cta {
-	padding: 16px 24px;
-	background: #f54528;
-	color: white;
-	font-weight: 500;
-	font-size: 24px;
-} */
