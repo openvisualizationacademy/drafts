@@ -33,7 +33,16 @@
   box-shadow: 0 0 0 1px light-dark(rgba(0, 0, 0, 0.5), rgba(255, 255, 255, 0.5));
   display: block;
   margin-block: 3.2rem;
+  opacity: 0;
+  transition: opacity 0.4s, translate 0.4s;
+  transition-delay: 1s;
+  translate: 0 4.8rem;
   width: clamp(0%, 100%, 64rem);
+
+  &.loaded {
+    opacity: 1;
+    translate: 0;
+  }
 }
 
 @media (min-width: 960px) {
