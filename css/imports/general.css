@@ -7,11 +7,17 @@
   font-display: swap;
 }
 
+:root {
+  color-scheme: light dark;
+}
+
 body {
   font-family: "AtkinsonHyperlegibleNextVF", sans-serif;
   font-size: 18px;
   line-height: 1.333333;
   font-weight: 400;
+  background: light-dark(white, black);
+  color: light-dark(black, white);
 }
 
 .button {
@@ -24,14 +30,14 @@ body {
 
 .button.secondary {
   padding: 6px 12px;
-  background: black;
-  color: white;
+  background: light-dark(black, white);
+  color: light-dark(white, black);
 }
 
 .button.primary {
   padding: 12px 16px;
-  background: #f54528;
-  color: white;
+  background: light-dark(#f54528, #f54528);
+  color: light-dark(white, white);
   font-weight: 500;
 }
 
