@@ -13,7 +13,19 @@
 }
 
 html {
-  font-size: 62.5%;
+  font-size: calc((8 / 16) * 100%);
+}
+
+@media (min-width: 340px) {
+  html {
+    font-size: calc((9 / 16) * 100%);
+  }
+}
+
+@media (min-width: 375px) {
+  html {
+    font-size: calc((10 / 16) * 100%);
+  }
 }
 
 body {
@@ -31,6 +43,7 @@ body {
   display: inline-flex;
   text-decoration: none;
   user-select: none;
+  white-space: nowrap;
 }
 
 .button.secondary {
