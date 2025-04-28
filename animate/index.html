@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,7 +12,7 @@
     }
 
     .logo {
-      margin: 32px auto;
+      margin: 96px auto;
       width: fit-content;
       cursor: pointer;
     }
@@ -23,10 +24,13 @@
     }
   </style>
 </head>
+
 <body>
 
   <button onclick="logo.resetTarget()">Original</button>
   <button onclick="logo.resetTarget('flat')">Flat</button>
+  <button onclick="logo.resetTarget('line')">Line</button>
+  <button onclick="logo.resetTarget('dot')">Dot</button>
   <button onclick="logo.randomizeTarget()">Randomize</button>
   <button onclick="logo.autoplay()">Autoplay</button>
   <label>
@@ -38,6 +42,7 @@
 
   <button onclick="logo.download()">Download</button>
 
-  
+
 </body>
+
 </html>

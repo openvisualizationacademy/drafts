@@ -53,6 +53,28 @@ export default class Logo {
         },
       },
 
+      line: {
+        palette: "YlOrRd",
+        steps: 255,
+        from: {
+          coords: [0, 3, 6, 3],
+        },
+        to: {
+          coords: [0, 3, 6, 3],
+        },
+      },
+
+      dot: {
+        palette: "YlOrRd",
+        steps: 255,
+        from: {
+          coords: [3, 3, 3, 3],
+        },
+        to: {
+          coords: [3, 3, 3, 3],
+        },
+      },
+
       original: {
         palette: "YlOrRd",
         steps: 255,
