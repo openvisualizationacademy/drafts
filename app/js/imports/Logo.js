@@ -153,8 +153,11 @@ export default class Logo {
   }
 
   drawWave() {
-    // TEMP: Fix number of steps
-    this.current.steps = 128 - 1;
+    // TEMP: Fixed number of steps
+    this.current.steps = 64 - 1;
+
+    // Apply transparency
+    this.context.globalAlpha = 0.5;
 
     this.colorScale = d3.scaleLinear().domain([0, 1]).range([0.2, 0.8]);
 
@@ -167,7 +170,8 @@ export default class Logo {
       const t = (1 / this.current.steps) * i;
 
       // Define stroke thickness
-      this.context.lineWidth = (this.thickness * 1.25 + Math.sin(t - this.lastTime * 0.001) * this.thickness) * this.pixelRatio;
+      this.context.lineWidth =
+        (this.thickness * 0.75 + Math.sin(t - this.lastTime * 0.001) * (this.thickness * 0.5)) * this.pixelRatio;
 
       // Translate to account for offsets and pivot for rotation
       let xOffset = (this.margin + t * this.side) * this.pixelRatio;

@@ -3,8 +3,12 @@
   display: flex;
   justify-content: end;
   width: 100%;
-  max-width: calc(168px * 5);
+  max-width: calc(168px * 4);
   margin: 0 auto;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
 }
 
 .wave canvas {
@@ -12,7 +16,6 @@
   display: block;
   user-select: none;
   pointer-events: none;
-  z-index: -1;
-  filter: blur(8px);
-  translate: 12.5%;
+  /* filter: blur(4px); */
+  translate: 12.5% -25%;
 }

@@ -1,0 +1,35 @@
+.cover {
+  /* background: pink; */
+  position: relative;
+  padding: 0 24px;
+  max-width: 1280px;
+  margin: 48px auto;
+  overflow: hidden;
+}
+
+.cover h1 {
+  margin: 0 0 48px;
+}
+
+.cover h1 svg {
+  /* max-width: calc(288px * 1.5); */
+  width: clamp(288px, 75%, calc(288px * 1.5));
+}
+
+.cover .description p {
+  text-wrap: balance;
+  max-width: 36ch;
+  margin: 0;
+}
+
+.cover .button {
+  margin-top: 24px;
+}
+
+.cover .preview {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  border-radius: 16px;
+  width: 40%;
+}

@@ -1,6 +1,7 @@
 header {
   padding: 12px 24px;
-  /* background: pink; */
+  max-width: 1280px;
+  margin: 0 auto;
 }
 
 header nav {
@@ -33,15 +34,4 @@ header nav a .logo {
 
 header nav a:hover .logo {
   translate: 0 0;
-}
-
-.button.secondary {
-  text-decoration: none;
-  color: inherit;
-  padding: 6px 12px;
-  border-radius: 999px;
-  background: black;
-  color: white;
-  display: inline-flex;
-  user-select: none;
 }
