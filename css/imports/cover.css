@@ -1,10 +1,12 @@
 .cover {
-  /* background: pink; */
   position: relative;
   padding: 0 24px;
   max-width: 1280px;
   margin: 48px auto;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
 }
 
 .cover h1 {
@@ -12,8 +14,7 @@
 }
 
 .cover h1 svg {
-  /* max-width: calc(288px * 1.5); */
-  width: clamp(288px, 75%, calc(288px * 1.5));
+  width: clamp(288px, 60vi, 432px);
 }
 
 .cover .description p {
@@ -26,10 +27,22 @@
   margin-top: 24px;
 }
 
-.cover .preview {
-  position: absolute;
-  top: 24px;
-  right: 24px;
+.cover .preview video {
+  display: block;
+  width: clamp(0%, 100%, 640px);
+  aspect-ratio: 16/9;
+  margin-block: 32px;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.5);
   border-radius: 16px;
-  width: 40%;
+}
+
+@media (min-width: 960px) {
+  .cover {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .cover .preview video {
+    width: clamp(288px, 40vi, 480px);
+  }
 }
