@@ -8,26 +8,6 @@
     url("../../fonts/AtkinsonHyperlegibleNextVF-Variable.woff2") format("woff2-variations");
 }
 
-:root {
-  color-scheme: light dark;
-}
-
-html {
-  font-size: calc((8 / 16) * 100%);
-}
-
-@media (min-width: 340px) {
-  html {
-    font-size: calc((9 / 16) * 100%);
-  }
-}
-
-@media (min-width: 375px) {
-  html {
-    font-size: calc((10 / 16) * 100%);
-  }
-}
-
 body {
   background: light-dark(white, black);
   color: light-dark(black, white);

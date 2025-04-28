@@ -33,3 +33,9 @@ header nav a .logo {
 header nav a:hover .logo {
   translate: 0 0;
 }
+
+@media (min-width: 640px) {
+  header nav a {
+    padding: 0.6rem 1.2rem;
+  }
+}
