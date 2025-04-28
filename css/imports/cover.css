@@ -34,14 +34,12 @@
   display: block;
   margin-block: 3.2rem;
   opacity: 0;
-  transition: opacity 0.4s, translate 0.4s;
-  transition-delay: 1s;
-  translate: 0 4.8rem;
+  transition: opacity 0.4s;
+  transition-delay: 0.4s;
   width: clamp(0%, 100%, 64rem);
 
   &.loaded {
     opacity: 1;
-    translate: 0;
   }
 }
 
