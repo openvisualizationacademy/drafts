@@ -24,6 +24,7 @@ body {
   text-decoration: none;
   user-select: none;
   white-space: nowrap;
+  outline-offset: 0.4rem;
 }
 
 .button.secondary {
