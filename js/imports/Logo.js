@@ -158,7 +158,6 @@ export default class Logo {
 
     // Apply transparency
     this.context.globalAlpha = 0.5;
-
     this.colorScale = d3.scaleLinear().domain([0, 1]).range([0.2, 0.8]);
 
     // Draw a line for each step
@@ -190,7 +189,6 @@ export default class Logo {
 
       // Define stroke color
       this.context.strokeStyle = d3[`interpolate${this.target.palette}`](this.colorScale(t));
-
       this.context.rotate(Math.cos(Math.pow(t, 1) * 1.5 + this.lastTime * 0.0005) * (Math.PI * 0.75));
 
       // Draw line
@@ -208,7 +206,6 @@ export default class Logo {
 
     // Clear canvas
     this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
-
     if (this.wave) {
       this.drawWave();
       return;
@@ -235,7 +232,6 @@ export default class Logo {
 
     // Account for margins when drawing
     this.context.translate(this.margin * this.pixelRatio, this.margin * this.pixelRatio);
-
     if (this.grid) {
       this.drawGrid();
     }
@@ -277,7 +273,6 @@ export default class Logo {
     // Get time elapsed since last frame (in seconds)
     this.deltaTime = (ms - this.lastTime) / 1000;
     this.lastTime = ms;
-
     if (this.format === "png") this.updateCanvas();
     if (this.format === "svg") this.updateSVG();
 
@@ -301,7 +296,6 @@ export default class Logo {
   randomizeTarget() {
     // Get random template (regions where a line and start and end)
     const template = this.randomItem(this.templates);
-
     const options = {
       palette: this.randomItem(this.palettes),
       steps: this.randomInt(255, 255),
@@ -314,7 +308,6 @@ export default class Logo {
         // thickness: this.randomInt(1, 4),
       },
     };
-
     this.target = options;
   }
 
@@ -324,7 +317,6 @@ export default class Logo {
     this.grid = false;
     this.decays = [6, 8, 10, 12].map((decay) => decay * 0.1);
     this.palettes = ["YlOrRd"];
-
     this.interval = setInterval(() => this.randomizeTarget(), 4000);
   }
 

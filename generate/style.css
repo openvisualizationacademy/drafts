@@ -36,10 +36,10 @@ button {
 .button {
   align-items: center;
   background: transparent;
-  border: 2px solid black;
-  background: black;
+  border: 2px solid var(--neutral-800);
+  background: var(--neutral-800);
   border-radius: 8px;
-  color: white;
+  color: var(--neutral-200);
   cursor: pointer;
   display: flex;
   font-weight: bold;
@@ -59,7 +59,7 @@ button {
 
 .button.tab {
   background: transparent;
-  color: black;
+  color: var(--neutral-800);
   border: 2px solid transparent;
   border-radius: 9999px;
   /* border-radius: 8px 8px 0 0; */
