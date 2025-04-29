@@ -30,7 +30,7 @@
 .cover .preview video {
   aspect-ratio: 16/9;
   border-radius: 1.6rem;
-  box-shadow: 0 0 0 1px light-dark(var(--neutral-300), var(--neutral-700));
+  box-shadow: 0 0 0 1px light-dark(var(--neutral-200), var(--neutral-800));
   display: block;
   margin-block: 3.2rem;
   opacity: 0;

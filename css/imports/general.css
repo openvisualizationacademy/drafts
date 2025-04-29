@@ -10,12 +10,12 @@
 
 body {
   --tile: 2.4rem;
-  background: light-dark(var(--neutral-100), var(--neutral-800));
+  background: light-dark(var(--neutral-100), var(--neutral-900));
   background-attachment: fixed;
-  background-image: radial-gradient(circle, light-dark(var(--neutral-300), var(--neutral-900)) 1px, transparent 1px);
+  background-image: radial-gradient(circle, light-dark(var(--neutral-300), var(--neutral-800)) 1px, transparent 1px);
   background-position: left top;
   background-size: var(--tile) var(--tile);
-  color: light-dark(var(--neutral-800), var(--neutral-100));
+  color: light-dark(var(--neutral-800), var(--neutral-200));
   font-family: "AtkinsonHyperlegibleNextVF", sans-serif;
   font-size: 1.8rem;
   font-weight: 400;
@@ -23,7 +23,7 @@ body {
   position: relative;
 
   &::before {
-    background: linear-gradient(light-dark(var(--neutral-100), var(--neutral-800)), transparent);
+    background: linear-gradient(light-dark(var(--neutral-100), var(--neutral-900)), transparent);
     content: "";
     inset: 0;
     pointer-events: none;
@@ -45,7 +45,7 @@ body {
 
 .button.secondary {
   background: light-dark(var(--neutral-800), var(--neutral-200));
-  color: light-dark(var(--neutral-100), var(--neutral-800));
+  color: light-dark(var(--neutral-100), var(--neutral-900));
   padding: 0.6rem 1.2rem;
 }
 
