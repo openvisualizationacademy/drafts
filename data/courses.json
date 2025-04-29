@@ -1,0 +1,77 @@
+[
+  {
+    "category": "core",
+    "title": "Introduction to Information Design and Visualization",
+    "authors": [
+      {
+        "name": "Alberto Cairo"
+      }
+    ]
+  },
+  {
+    "category": "conceptual",
+    "title": "Building Stories With Data",
+    "authors": [
+      {
+        "name": "Gurman Bhatia"
+      }
+    ]
+  },
+  {
+    "category": "conceptual",
+    "title": "The Ethics of Data and Visualization",
+    "authors": [
+      {
+        "name": "Bridget Winds Cogley"
+      }
+    ]
+  },
+  {
+    "category": "conceptual",
+    "title": "The Art of Reading Visualizations",
+    "authors": [
+      {
+        "name": "Enrico Bertini"
+      }
+    ]
+  },
+  {
+    "category": "conceptual",
+    "title": "Feminist Visualization",
+    "authors": [
+      {
+        "name": "Lauren Klein"
+      },
+      {
+        "name": "Catherine D'Ignazio"
+      }
+    ]
+  },
+  {
+    "category": "conceptual",
+    "title": "History of Visualization",
+    "authors": [
+      {
+        "name": "Michael Friendly"
+      }
+    ]
+  },
+  {
+    "category": "conceptual",
+    "title": "Accessibility",
+    "authors": [
+      {
+        "name": "Frank Elavsky"
+      }
+    ]
+  },
+  {
+    "category": "conceptual",
+    "title": "Generative AI for Visualization",
+    "authors": [
+      {
+        "name": "Joy Victor"
+      }
+    ]
+  }
+]
