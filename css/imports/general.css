@@ -9,18 +9,23 @@
 }
 
 body {
-  --tile: 2.4rem;
   background: light-dark(var(--neutral-100), var(--neutral-900));
-  background-attachment: fixed;
-  background-image: radial-gradient(circle, light-dark(var(--neutral-300), var(--neutral-800)) 1px, transparent 1px);
-  background-position: left top;
-  background-size: var(--tile) var(--tile);
   color: light-dark(var(--neutral-800), var(--neutral-200));
   font-family: "AtkinsonHyperlegibleNextVF", sans-serif;
   font-size: 1.8rem;
   font-weight: 400;
-  line-height: 1.333333;
-  position: relative;
+  line-height: 2.4rem;
+}
+
+.background {
+  background: light-dark(var(--neutral-100), var(--neutral-900));
+  background-image: radial-gradient(circle, light-dark(var(--neutral-300), var(--neutral-800)) 1px, transparent 1px);
+  background-position: center top;
+  background-size: 2.4rem 2.4rem;
+  inset: 0;
+  pointer-events: none;
+  position: fixed;
+  z-index: -1;
 
   &::before {
     background: linear-gradient(light-dark(var(--neutral-100), var(--neutral-900)), transparent);
@@ -30,13 +35,59 @@ body {
     position: fixed;
     z-index: -1;
   }
-  /* background-size: 2.4rem 2.4rem; */
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 400;
+  margin: 0;
+}
+
+section:not(.cover) {
+  display: flex;
+  flex-direction: column;
+  gap: 4.8rem;
+  margin: 9.6rem auto;
+  max-width: 128rem;
+  min-height: 50vb;
+  padding-inline: 2.4rem;
+  position: relative;
+
+  /* --color: var(--primary-600); */
+  /* background-image: linear-gradient(135deg, transparent 50%, var(--color) 1px, transparent calc(50% + 1px)); */
+  /* background-repeat: repeat-x; */
+  /* background-size: 0.8rem 0.8rem; */
+  /* margin-block-start: 9.6rem; */
+  /* margin-inline: 2.4rem; */
+  /* &.courses {
+    --color: var(--primary-600);
+  }
+
+  &.about {
+    --color: var(--primary-400);
+  }
+
+  &.news {
+    --color: var(--primary-300);
+  } */
+}
+
+footer {
+  margin-block-start: 9.6rem;
+  margin-inline: 2.4rem;
+  min-height: 50vb;
+  padding-block: 2.4rem;
 }
 
 .button {
   border-radius: 999px;
   color: inherit;
   display: inline-flex;
+  font-weight: 500;
   outline-offset: 0.4rem;
   text-decoration: none;
   user-select: none;
@@ -52,6 +103,5 @@ body {
 .button.primary {
   background: light-dark(var(--primary-600), var(--primary-600));
   color: light-dark(var(--neutral-100), var(--neutral-100));
-  font-weight: 500;
   padding: 1.2rem 1.6rem;
 }
