@@ -78,7 +78,9 @@ section:not(.cover) {
 
 footer {
   margin-block-start: 9.6rem;
-  margin-inline: 2.4rem;
+  margin-inline: auto;
   min-height: 50vb;
   padding-block: 2.4rem;
+  padding-inline: 2.4rem;
+  max-width: 128rem;
 }

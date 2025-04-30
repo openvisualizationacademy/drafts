@@ -1,0 +1,100 @@
+.courses {
+}
+
+.courses .cards {
+  display: grid;
+  gap: 2.4rem;
+  grid-template-columns: repeat(auto-fit, minmax(32rem, 1fr));
+}
+
+.course .media {
+  aspect-ratio: 16/9;
+  background: light-dark(var(--neutral-200), var(--neutral-800));
+  opacity: 0.5;
+  width: 100%;
+}
+
+.course {
+  border: 1px solid light-dark(var(--neutral-200), var(--neutral-800));
+  border-radius: 1.6rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  justify-content: space-between;
+  overflow: hidden;
+  text-decoration: none;
+  color: inherit;
+  transition: border 0.2s;
+}
+
+.course p {
+  margin: 0;
+}
+
+.course h3 {
+  padding: 1.6rem;
+}
+
+.authors {
+  display: flex;
+  flex-wrap: wrap;
+  font-size: smaller;
+  gap: 1.6rem;
+  padding: 0 1.6rem;
+}
+
+.author {
+  align-items: center;
+  display: flex;
+  gap: 0.8rem;
+  white-space: nowrap;
+}
+
+.author::before {
+  align-self: center;
+  aspect-ratio: 1;
+  background: light-dark(var(--neutral-200), var(--neutral-800));
+  border-radius: 50%;
+  content: "";
+  display: inline-flex;
+  flex-shrink: 0;
+  width: 2.4rem;
+}
+
+.course .secondary {
+  display: flex;
+  font-size: small;
+  gap: 2.4rem;
+  padding: 1.6rem;
+  justify-content: space-between;
+}
+
+.tags {
+  display: flex;
+  gap: 0.8rem;
+}
+
+.tag {
+  align-items: center;
+  border-radius: 0.8rem;
+  display: inline-flex;
+  padding: 0;
+  text-shadow: 0 0 0.5em var(--neutral-900);
+}
+
+.tag::before {
+  content: "#";
+}
+
+.duration {
+  display: flex;
+  gap: 0.4rem;
+  align-items: baseline;
+  color: light-dark(var(--neutral-400), var(--neutral-600));
+}
+
+@media (hover: hover) {
+  .course:hover {
+    border: 1px solid light-dark(var(--neutral-400), var(--neutral-600));
+  }
+}

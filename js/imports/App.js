@@ -20,7 +20,7 @@ export default class App {
       wave: true,
     });
 
-    this.courses = new Courses(".courses .widget");
+    this.courses = new Courses(".courses .cards");
   }
 
   update() {}

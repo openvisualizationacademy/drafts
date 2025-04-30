@@ -1,6 +1,6 @@
 [
   {
-    "tags": ["core"],
+    "tags": ["Essential"],
     "title": "Introduction to Information Design and Visualization",
     "authors": [
       {
@@ -9,7 +9,7 @@
     ]
   },
   {
-    "tags": ["conceptual"],
+    "tags": ["Conceptual"],
     "title": "Building Stories With Data",
     "authors": [
       {
@@ -18,7 +18,7 @@
     ]
   },
   {
-    "tags": ["conceptual"],
+    "tags": ["Conceptual"],
     "title": "The Ethics of Data and Visualization",
     "authors": [
       {
@@ -27,7 +27,7 @@
     ]
   },
   {
-    "tags": ["conceptual"],
+    "tags": ["Conceptual"],
     "title": "The Art of Reading Visualizations",
     "authors": [
       {
@@ -36,7 +36,7 @@
     ]
   },
   {
-    "tags": ["conceptual"],
+    "tags": ["Conceptual"],
     "title": "Feminist Visualization",
     "authors": [
       {
@@ -48,7 +48,7 @@
     ]
   },
   {
-    "tags": ["conceptual"],
+    "tags": ["Conceptual"],
     "title": "History of Visualization",
     "authors": [
       {
@@ -57,7 +57,7 @@
     ]
   },
   {
-    "tags": ["conceptual"],
+    "tags": ["Conceptual"],
     "title": "Accessibility",
     "authors": [
       {
@@ -66,7 +66,7 @@
     ]
   },
   {
-    "tags": ["conceptual"],
+    "tags": ["Conceptual"],
     "title": "Generative AI for Visualization",
     "authors": [
       {
@@ -75,7 +75,7 @@
     ]
   },
   {
-    "tags": ["technical"],
+    "tags": ["Technical"],
     "title": "Adobe Illustrator for Visualization",
     "authors": [
       {
@@ -84,7 +84,7 @@
     ]
   },
   {
-    "tags": ["technical"],
+    "tags": ["Technical"],
     "title": "R for Data Preparation, Exploration, and Visualization",
     "authors": [
       {
@@ -93,7 +93,7 @@
     ]
   },
   {
-    "tags": ["technical"],
+    "tags": ["Technical"],
     "title": "Python for Visualization",
     "authors": [
       {
@@ -102,7 +102,7 @@
     ]
   },
   {
-    "tags": ["technical"],
+    "tags": ["Technical"],
     "title": "Flourish",
     "authors": [
       {
@@ -111,7 +111,7 @@
     ]
   },
   {
-    "tags": ["technical"],
+    "tags": ["Technical"],
     "title": "Storytelling with Datawrapper",
     "authors": [
       {
@@ -120,7 +120,7 @@
     ]
   },
   {
-    "tags": ["technical"],
+    "tags": ["Technical"],
     "title": "RawGraphs for Visualization",
     "authors": [
       {
@@ -129,7 +129,7 @@
     ]
   },
   {
-    "tags": ["technical"],
+    "tags": ["Technical"],
     "title": "Figma for Visualization",
     "authors": [
       {
@@ -138,7 +138,7 @@
     ]
   },
   {
-    "tags": ["conceptual", "technical"],
+    "tags": ["Conceptual", "Technical"],
     "title": "Cartography and Map Design with QGIS",
     "authors": [
       {
@@ -147,7 +147,7 @@
     ]
   },
   {
-    "tags": ["conceptual", "technical"],
+    "tags": ["Conceptual", "Technical"],
     "title": "Dashboard Design Principles with Tableau and PowerBI",
     "authors": [
       {
@@ -156,7 +156,7 @@
     ]
   },
   {
-    "tags": ["personal"],
+    "tags": ["Personal"],
     "title": "Shirley Wu’s Design Philosophy",
     "authors": [
       {
@@ -165,7 +165,7 @@
     ]
   },
   {
-    "tags": ["personal"],
+    "tags": ["Personal"],
     "title": "Sonja Kuijper’s Design Philosophy",
     "authors": [
       {
@@ -174,7 +174,7 @@
     ]
   },
   {
-    "tags": ["personal"],
+    "tags": ["Personal"],
     "title": "Deniz Cem Önduygu’s Design Philosophy",
     "authors": [
       {
