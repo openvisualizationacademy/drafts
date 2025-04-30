@@ -1,4 +1,3 @@
-import Logo from "./imports/Logo.js";
+import App from "./imports/App.js";
 
-window.logo = new Logo({ parent: ".logo", margin: 1, side: 96 });
-window.waves = new Logo({ parent: ".wave", margin: 168 / 2, side: 168, wave: true });
+window.app = new App();
