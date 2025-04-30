@@ -7,15 +7,19 @@ export default class Courses {
   }
 
   async setup() {
-    console.log(this.element);
-    this.list = await d3.json("../../data/courses.json");
+    this.data = await d3.json("../../data/courses.json");
 
-    console.log(this.list);
-
-    this.list.forEach((course) => {
+    this.data.forEach((course) => {
       const item = `
       <div class="course">
-      ${course.title}
+        <div class="media"></div>
+        <h3>${course.title}</h3>
+        <p class="authors">
+          ${course.authors.map((author) => `<span class="author">${author.name}</span>`).join("")}
+        </p>
+        <p class="tags">
+          ${course.tags.map((tag) => `<span class="tag">${tag}</span>`).join("")}
+        </p>
       </div>
       `;
 
