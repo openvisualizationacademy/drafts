@@ -5,9 +5,6 @@ export default class Courses {
     this.element = document.querySelector(selector) || document.body;
     this.setup();
 
-    // Darkest 2 colors of YoOrRd, YlGnBu, and RdPu (from 4-color schemes of ColorBrewwer)
-    // this.colors = ["#e31a1c", "#225ea8", "#ae017e", "#fd8d3c", "#41b6c4", "#f768a1"];
-    console.log();
     this.colors = [
       d3.schemeTableau10[2], // red
       d3.schemeTableau10[1], // orange
@@ -17,15 +14,11 @@ export default class Courses {
       d3.schemeTableau10[7], // pink
     ];
 
-    this.subtleColors = this.colors.map((color) => {
-      const subtle = d3.color(color);
-      subtle.opacity = 1;
-      return subtle.toString();
-    });
-
-    // this.colors = d3.schemeObservable10;
-
-    // console.log(this.colors);
+    // this.subtleColors = this.colors.map((color) => {
+    //   const subtle = d3.color(color);
+    //   subtle.opacity = 1;
+    //   return subtle.toString();
+    // });
   }
 
   async setup() {
@@ -38,25 +31,32 @@ export default class Courses {
       });
     });
     this.data.forEach((course) => {
+      // TEMP: Fake duration in hours
+      const duration = Math.ceil(Math.random() * 6);
       const item = `
       <a href="#" class="course">
         <div class="primary">
           <div class="media"></div>
-          <h3>${course.title}</h3>
+          <h3>${course.title}<span class="screen-reader"/>.</span></h3>
           <p class="authors">
-            ${course.authors.map((author) => `<span class="author">${author.name}</span>`).join("")}
+            <span class="screen-reader">${course.authors.length > 1 ? "Authors" : "Author"}:</span>
+            ${course.authors
+              .map((author) => `<span class="author">${author.name}</span>`)
+              .join(`<span class="screen-reader"/>.</span>`)}
+            <span class="screen-reader"/>.</span>
           </p>
         </div>
         <div class="secondary">
           <p class="tags">
             ${course.tags
               .map((tag) => `<span class="tag" style="color: ${this.colors[this.tags.indexOf(tag)]}">${tag}</span>`)
-              .join("")}
+              .join(`<span class="screen-reader"/>.</span>`)}
+            <span class="screen-reader"/>.</span>
           </p>
           <p class="duration">
-            <span class="screen-reader">Duration</span>
+            <span class="screen-reader">Duration: </span>
             <i class="iconoir-timer" style="translate: 0 .1em"></i>
-            ${Math.ceil(Math.random() * 6)}h
+            ${duration}<span aria-hidden="true">h</span><span class="screen-reader">${duration === 1 ? "hour" : "hours"}</span>
           </p>
         </div>
       </a>

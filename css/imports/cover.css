@@ -17,7 +17,7 @@
   width: clamp(28.8rem, 60vi, 43.2rem);
 }
 
-.cover .description p {
+.cover .description {
   margin: 0;
   max-width: 36ch;
   text-wrap: balance;

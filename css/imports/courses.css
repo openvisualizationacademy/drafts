@@ -15,15 +15,15 @@
 }
 
 .course {
-  border: 1px solid light-dark(var(--neutral-200), var(--neutral-800));
+  border: 1px solid light-dark(var(--neutral-300), var(--neutral-800));
   border-radius: 1.6rem;
+  color: inherit;
   display: flex;
   flex-direction: column;
   gap: 0;
   justify-content: space-between;
   overflow: hidden;
   text-decoration: none;
-  color: inherit;
   transition: border 0.2s;
 }
 
@@ -33,6 +33,7 @@
 
 .course h3 {
   padding: 1.6rem;
+  border-top: 1px solid light-dark(var(--neutral-300), var(--neutral-800));
 }
 
 .authors {
@@ -54,6 +55,7 @@
   align-self: center;
   aspect-ratio: 1;
   background: light-dark(var(--neutral-200), var(--neutral-800));
+  border: 1px solid light-dark(var(--neutral-300), var(--neutral-800));
   border-radius: 50%;
   content: "";
   display: inline-flex;
@@ -65,8 +67,8 @@
   display: flex;
   font-size: small;
   gap: 2.4rem;
-  padding: 1.6rem;
   justify-content: space-between;
+  padding: 1.6rem;
 }
 
 .tags {
@@ -79,22 +81,27 @@
   border-radius: 0.8rem;
   display: inline-flex;
   padding: 0;
-  text-shadow: 0 0 0.5em var(--neutral-900);
+  font-weight: 500;
 }
 
 .tag::before {
-  content: "#";
+  content: "#" / "Tag: ";
+
+  /* Add alt text for screen readers */
 }
 
 .duration {
-  display: flex;
-  gap: 0.4rem;
   align-items: baseline;
-  color: light-dark(var(--neutral-400), var(--neutral-600));
+  color: light-dark(var(--neutral-600), var(--neutral-400));
+  display: flex;
+}
+
+.duration i {
+  margin-inline: 0.4rem;
 }
 
 @media (hover: hover) {
   .course:hover {
-    border: 1px solid light-dark(var(--neutral-400), var(--neutral-600));
+    border: 1px solid light-dark(var(--neutral-900), var(--neutral-100));
   }
 }
