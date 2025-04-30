@@ -119,8 +119,10 @@ export default class Logo {
 
     // Add canvas to page
     this.parent.append(this.canvas);
+  }
 
-    // Add hover events and prevent triggering it immediatly when page loads
+  addHoverEvents() {
+    // Add hover events, but prevent triggering it immediatly when page loads
     setTimeout(() => {
       this.parent.addEventListener("mouseenter", () => {
         this.resetTarget("flat");
@@ -276,6 +278,11 @@ export default class Logo {
   setup() {
     if (this.format === "png") this.setupCanvas();
     if (this.format === "svg") this.setupSVG();
+
+    // If device supports hover
+    if (window.matchMedia("(hover: hover)").matches) {
+      this.addHoverEvents();
+    }
   }
 
   update(ms) {
