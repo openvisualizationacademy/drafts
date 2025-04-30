@@ -37,10 +37,10 @@
   transition: opacity 0.4s;
   transition-delay: 0.4s;
   width: clamp(0%, 100%, 64rem);
+}
 
-  &.loaded {
-    opacity: 1;
-  }
+.cover .preview video.loaded {
+  opacity: 1;
 }
 
 @media (min-width: 960px) {

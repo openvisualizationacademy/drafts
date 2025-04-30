@@ -82,26 +82,3 @@ footer {
   min-height: 50vb;
   padding-block: 2.4rem;
 }
-
-.button {
-  border-radius: 999px;
-  color: inherit;
-  display: inline-flex;
-  font-weight: 500;
-  outline-offset: 0.4rem;
-  text-decoration: none;
-  user-select: none;
-  white-space: nowrap;
-}
-
-.button.secondary {
-  background: light-dark(var(--neutral-800), var(--neutral-200));
-  color: light-dark(var(--neutral-100), var(--neutral-900));
-  padding: 0.6rem 1.2rem;
-}
-
-.button.primary {
-  background: light-dark(var(--primary-600), var(--primary-600));
-  color: light-dark(var(--neutral-100), var(--neutral-100));
-  padding: 1.2rem 1.6rem;
-}
