@@ -66,7 +66,7 @@ export default class Logo {
     };
 
     // Copy original symbol as the current one
-    this.defaults.current = structuredClone(this.defaults.original);
+    this.defaults.current = this.clone(this.defaults.original);
 
     // Merge provided options with defaults
     Object.assign(this, this.defaults, options);
@@ -88,6 +88,15 @@ export default class Logo {
 
     // Run update for the first time
     window.requestAnimationFrame((ms) => this.update(ms));
+  }
+
+  clone(object) {
+    if (typeof structuredClone === "function") {
+      return structuredClone(object);
+    }
+
+    // Polyfill for old iOS
+    return JSON.parse(JSON.stringify(this.defaults.original));
   }
 
   // Cool transition from Freya Holmér’s Lerp Smoothing talk https://youtu.be/LSNQuFEDOyQ
