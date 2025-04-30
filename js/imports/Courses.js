@@ -22,7 +22,7 @@ export default class Courses {
   }
 
   async setup() {
-    this.data = await d3.json("../../data/courses.json");
+    this.data = await d3.json("../data/courses.json");
     this.tags = [];
     this.data.forEach((course) => {
       course.tags.forEach((tag) => {
