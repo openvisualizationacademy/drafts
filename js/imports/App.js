@@ -1,7 +1,8 @@
 import Logo from "./Logo.js";
+import Courses from "./Courses.js";
 
 export default class App {
-  constructor(selector = "body") {
+  constructor(selector) {
     this.element = document.querySelector(selector) || document.body;
     this.setup();
   }
@@ -18,6 +19,8 @@ export default class App {
       side: 168,
       wave: true,
     });
+
+    this.courses = new Courses(".courses .widget");
   }
 
   update() {}
