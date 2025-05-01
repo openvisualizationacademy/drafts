@@ -4,8 +4,8 @@
   gap: 4.8rem;
   margin: 4.8rem auto;
   max-width: 128rem;
-  overflow: hidden;
-  padding: 0 2.4rem;
+  overflow: clip;
+  padding: 0 2.4rem 4.8rem;
   position: relative;
 }
 

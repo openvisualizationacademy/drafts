@@ -21,7 +21,7 @@ export default class App {
       wave: true,
     });
 
-    this.courses = new Courses(".courses .cards");
+    this.courses = new Courses(".courses .widget");
     this.themePicker = new ThemePicker(".theme-picker");
   }
 
