@@ -9,9 +9,10 @@
 
 .course .media {
   aspect-ratio: 16/9;
-  background: light-dark(var(--neutral-200), var(--neutral-800));
   opacity: 0.5;
   width: 100%;
+
+  /* background: light-dark(var(--neutral-200), var(--neutral-800)); */
 }
 
 .course {
@@ -32,14 +33,14 @@
 }
 
 .course h3 {
-  padding: 1.6rem;
   border-top: 1px solid light-dark(var(--neutral-300), var(--neutral-800));
+  padding: 1.6rem;
 }
 
 .authors {
   display: flex;
   flex-wrap: wrap;
-  font-size: smaller;
+  font-size: 1.6rem;
   gap: 1.6rem;
   padding: 0 1.6rem;
 }
@@ -65,7 +66,7 @@
 
 .course .secondary {
   display: flex;
-  font-size: small;
+  font-size: 1.4rem;
   gap: 2.4rem;
   justify-content: space-between;
   padding: 1.6rem;
@@ -80,14 +81,12 @@
   align-items: center;
   border-radius: 0.8rem;
   display: inline-flex;
-  padding: 0;
   font-weight: 500;
+  padding: 0;
 }
 
 .tag::before {
   content: "#" / "Tag: ";
-
-  /* Add alt text for screen readers */
 }
 
 .duration {
@@ -96,8 +95,10 @@
   display: flex;
 }
 
-.duration i {
-  margin-inline: 0.4rem;
+.duration .icon {
+  margin-inline: 0.25em;
+  translate: 0 0.05em;
+  width: 1em;
 }
 
 @media (hover: hover) {

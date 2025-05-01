@@ -55,7 +55,13 @@ export default class Courses {
           </p>
           <p class="duration">
             <span class="screen-reader">Duration: </span>
-            <i class="iconoir-timer" style="translate: 0 .1em"></i>
+            <svg class="icon" data-iconoir="timer" viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M9 2L15 2"></path>
+              <path d="M12 10L12 14"></path>
+              <path
+                d="M12 22C16.4183 22 20 18.4183 20 14C20 9.58172 16.4183 6 12 6C7.58172 6 4 9.58172 4 14C4 18.4183 7.58172 22 12 22Z">
+              </path>
+            </svg>
             ${duration}<span aria-hidden="true">h</span><span class="screen-reader">${duration === 1 ? "hour" : "hours"}</span>
           </p>
         </div>
