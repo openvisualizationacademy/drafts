@@ -4,22 +4,28 @@
 .courses .filters {
   display: flex;
   flex-wrap: wrap;
-  font-size: 1.4rem;
-  font-weight: 500;
   gap: 0.4rem;
   margin-block-end: 2.4rem;
 }
 
 .courses .filters label {
+  align-items: center;
   border: 1px solid light-dark(var(--neutral-300), var(--neutral-800));
   border-radius: 999px;
   cursor: pointer;
+  display: flex;
+  font-size: 1.6rem;
+  font-weight: 500;
+  gap: 0.6rem;
+  letter-spacing: 0.025em;
   padding: 0.6rem 1.2rem;
+  user-select: none;
 }
 
 .courses .filters label:has(input:focus-visible) {
   outline: 5px auto Highlight;
   outline: 5px auto -webkit-focus-ring-color;
+  outline-offset: 0.4rem;
 }
 
 .courses .filters input:not(:checked) + span {
@@ -27,11 +33,30 @@
 }
 
 .courses .filters input:not([value="all"]) + span::before {
-  content: "#" / "Tag: ";
+  content: "" / "Tag: ";
+}
+
+.courses .filters label::before {
+  border: 1px solid light-dark(var(--neutral-300), var(--neutral-800));
+  border-radius: 999px;
+  content: "";
+  display: block;
+  height: 0.666em;
+  width: 0.666em;
 }
 
 .courses .filters label:has(input:checked) {
   border: 1px solid currentColor;
+
+  /* border: 1px solid light-dark(var(--neutral-900), var(--neutral-100)); */
+}
+
+.courses .filters label:has(input:checked)::before {
+  background: light-dark(var(--neutral-900), var(--neutral-100));
+  border: 1px solid light-dark(var(--neutral-900), var(--neutral-100));
+  box-shadow: 0 0 1.6rem 0.2rem light-dark(transparent, currentColor);
+
+  /* background: currentColor; */
 }
 
 .courses .filters input {
@@ -108,6 +133,7 @@
   font-size: 1.4rem;
   gap: 2.4rem;
   justify-content: space-between;
+  letter-spacing: 0.025em;
   padding: 1.6rem;
 }
 
@@ -124,9 +150,9 @@
   padding: 0;
 }
 
-.course .tag::before {
-  content: "#" / "Tag: ";
-}
+/* .course .tag::before {
+  content: "" / "Tag: ";
+} */
 
 .course .duration {
   align-items: baseline;

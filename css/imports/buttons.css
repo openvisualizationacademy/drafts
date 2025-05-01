@@ -9,6 +9,7 @@
   text-decoration: none;
   user-select: none;
   white-space: nowrap;
+  letter-spacing: 0.025em;
 }
 
 /* Fallback for browser that don’t support light-dark */
