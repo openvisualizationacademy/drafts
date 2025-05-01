@@ -1,5 +1,6 @@
 import Logo from "./Logo.js";
 import Courses from "./Courses.js";
+import ThemePicker from "./ThemePicker.js";
 
 export default class App {
   constructor(selector) {
@@ -21,6 +22,7 @@ export default class App {
     });
 
     this.courses = new Courses(".courses .cards");
+    this.themePicker = new ThemePicker(".theme-picker");
   }
 
   update() {}

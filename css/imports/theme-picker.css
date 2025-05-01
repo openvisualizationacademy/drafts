@@ -1,0 +1,64 @@
+:root:has(.theme-picker [value="light"]:checked) {
+  color-scheme: light;
+}
+
+:root:has(.theme-picker [value="dark"]:checked) {
+  color-scheme: dark;
+}
+
+.theme-picker {
+  background: light-dark(var(--neutral-300), var(--neutral-800));
+  border-radius: 999px;
+  color: inherit;
+  display: none;
+  font-weight: 500;
+  gap: 0.4rem;
+  outline-offset: 0.4rem;
+  overflow: hidden;
+  padding: 0.4rem 0.4rem;
+  position: relative;
+  text-decoration: none;
+  user-select: none;
+  white-space: nowrap;
+}
+
+.theme-picker input {
+  appearance: none;
+  position: absolute;
+  width: 0;
+}
+
+.theme-picker label {
+  align-items: center;
+  background: transparent;
+  border-radius: 999px;
+  color: light-dark(var(--neutral-100), var(--neutral-600));
+  cursor: pointer;
+  display: flex;
+  font-size: 2rem;
+  gap: 0;
+  padding: 0.4rem 0.4rem;
+}
+
+.theme-picker label:has(input:focus-visible) {
+  outline: 5px auto Highlight;
+  outline: 5px auto -webkit-focus-ring-color;
+}
+
+/* .theme-picker span {
+  display: flex;
+  opacity: 0;
+  padding-inline-start: 0;
+  width: 0;
+} */
+
+.theme-picker label:has(input:checked) {
+  background: light-dark(var(--neutral-100), var(--neutral-900));
+  color: light-dark(var(--neutral-800), var(--neutral-100));
+}
+
+@media (min-width: 640px) {
+  .theme-picker {
+    display: flex;
+  }
+}

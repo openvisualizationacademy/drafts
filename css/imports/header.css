@@ -52,6 +52,12 @@ header nav a .logo {
   padding: 0.4rem 0 0.4rem 0;
 }
 
+header .account {
+  display: flex;
+  align-items: center;
+  gap: 1.6rem;
+}
+
 @media (hover: hover) {
   header nav .links a:hover::after {
     opacity: 1;
