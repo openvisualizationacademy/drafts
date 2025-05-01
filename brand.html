@@ -4,8 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Animated Logo | Open Visualization Academy</title>
-  <script src="script.js" type="module"></script>
+  <title>Brand | Open Visualization Academy</title>
   <style>
     body {
       text-align: center;
@@ -23,6 +22,11 @@
       user-select: none;
     }
   </style>
+  <script type="module">
+    import Logo from "./js/imports/Logo.js";
+
+    window.logo = new Logo({ parent: ".logo" });
+  </script>
 </head>
 
 <body>
@@ -35,14 +39,12 @@
   <button onclick="logo.autoplay()">Autoplay</button>
   <label>
     Waves
-    <input type="checkbox" name="wave" onclick="logo.toggleWaves()">
+    <input type="checkbox" name="wave" onclick="logo.toggleWave()">
   </label>
 
   <div class="logo"></div>
 
   <button onclick="logo.download()">Download</button>
-
-
 </body>
 
 </html>

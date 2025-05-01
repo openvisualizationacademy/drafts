@@ -17,6 +17,7 @@ export default class Logo {
       ],
 
       wave: false,
+      background: false, // color string or false
 
       templates: [
         // horizontal
@@ -41,6 +42,28 @@ export default class Logo {
       format: "png", // TODO: Support svg
       palettes: ["YlOrRd", "YlGnBu", "RdPu"],
       grid: false,
+
+      dot: {
+        palette: "YlOrRd",
+        steps: 255,
+        from: {
+          coords: [3, 3, 3, 3],
+        },
+        to: {
+          coords: [3, 3, 3, 3],
+        },
+      },
+
+      line: {
+        palette: "YlOrRd",
+        steps: 255,
+        from: {
+          coords: [0, 3, 6, 3],
+        },
+        to: {
+          coords: [0, 3, 6, 3],
+        },
+      },
 
       flat: {
         palette: "YlOrRd",
@@ -217,6 +240,13 @@ export default class Logo {
 
     // Clear canvas
     this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+
+    // Pain background with solid color, if provided
+    if (this.background) {
+      this.context.fillStyle = this.background;
+      this.context.fillRect(0, 0, this.canvas.width, this.canvas.height);
+    }
+
     if (this.wave) {
       this.drawWave();
       return;
@@ -251,8 +281,6 @@ export default class Logo {
     for (let i = 0; i <= this.current.steps; i++) {
       // Get value between 0 and 1
       const t = (1 / this.current.steps) * i;
-
-      // console.log(t);
 
       // Find values for the current step
       const blend = this.interpolator(t);
