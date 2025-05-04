@@ -72,4 +72,8 @@ header .account {
   header nav .links {
     gap: 0.6rem;
   }
+
+  header nav .links a:first-child {
+    margin-inline-end: 1.6rem;
+  }
 }
