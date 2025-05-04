@@ -1,6 +1,7 @@
 import Logo from "./Logo.js";
 import Courses from "./Courses.js";
 import ThemePicker from "./ThemePicker.js";
+import PreviewVideo from "./PreviewVideo.js";
 
 export default class App {
   constructor(selector) {
@@ -23,6 +24,7 @@ export default class App {
 
     this.courses = new Courses(".courses .widget");
     this.themePicker = new ThemePicker(".theme-picker");
+    this.previewVideo = new PreviewVideo(".preview");
   }
 
   update() {}
