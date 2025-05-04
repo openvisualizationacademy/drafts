@@ -1,8 +1,16 @@
 .button {
+  align-items: center;
+  appearance: none;
+  background: transparent;
+  border: none;
   border-radius: 999px;
   color: inherit;
+  cursor: pointer;
   display: inline-flex;
+  font-family: inherit;
+  font-size: inherit;
   font-weight: 500;
+  gap: 0.8rem;
   letter-spacing: 0.025em;
   outline-offset: 0.4rem;
   overflow: hidden;
@@ -24,14 +32,33 @@
   z-index: -1;
 }
 
+.button.primary {
+  background-color: light-dark(var(--primary-600), var(--primary-600));
+  color: light-dark(var(--neutral-100), var(--neutral-100));
+  padding: 1.2rem 1.6rem;
+}
+
 .button.secondary {
   background-color: light-dark(var(--neutral-800), var(--neutral-200));
   color: light-dark(var(--neutral-100), var(--neutral-900));
   padding: 0.6rem 1.2rem;
 }
 
-.button.primary {
-  background-color: light-dark(var(--primary-600), var(--primary-600));
-  color: light-dark(var(--neutral-100), var(--neutral-100));
-  padding: 1.2rem 1.6rem;
+.button.tertiary {
+  background-color: light-dark(var(--neutral-100), var(--neutral-900));
+  border: 1px solid light-dark(var(--neutral-300), var(--neutral-800));
+  color: light-dark(var(--neutral-500), var(--neutral-500));
+  font-size: 1.6rem;
+  padding: 0.6rem 1.2rem;
+
+  &:focus-visible {
+    color: light-dark(var(--neutral-800), var(--neutral-200));
+  }
+}
+
+@media (hover: hover) {
+  .button.tertiary:hover {
+    border: 1px solid currentColor;
+    color: light-dark(var(--neutral-800), var(--neutral-200));
+  }
 }
