@@ -8,6 +8,7 @@
 
 .theme-picker {
   border-radius: 999px;
+  background: light-dark(var(--neutral-100), var(--neutral-900));
   box-shadow: inset 0 0 0 1px light-dark(var(--neutral-300), var(--neutral-800));
   color: inherit;
   display: none;

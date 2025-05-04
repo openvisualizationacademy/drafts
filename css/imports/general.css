@@ -29,7 +29,7 @@ body {
   z-index: -1;
 
   &::before {
-    background: linear-gradient(light-dark(var(--neutral-100), var(--neutral-900)), transparent 60%);
+    background: linear-gradient(light-dark(var(--neutral-100), var(--neutral-900)), transparent 66.666%);
     content: "";
     inset: 0;
     pointer-events: none;
