@@ -99,6 +99,7 @@
 .course h3 {
   border-top: 1px solid light-dark(var(--neutral-300), var(--neutral-800));
   padding: 1.6rem;
+  text-wrap: balance;
 }
 
 .authors {
