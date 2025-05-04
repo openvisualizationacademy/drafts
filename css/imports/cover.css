@@ -1,20 +1,23 @@
 .cover {
-  display: flex;
-  flex-direction: column;
-  gap: 4.8rem;
-  margin: 4.8rem auto;
-  max-width: 128rem;
-  overflow: clip;
-  padding: 0 2.4rem 4.8rem;
+  grid-column: span 12;
   position: relative;
 }
 
+.cover .info {
+  grid-column: span 12;
+}
+
+.cover .preview {
+  grid-column: span 12;
+}
+
 .cover h1 {
-  margin: 0 0 4.8rem;
+  line-height: 0;
+  margin-block-end: 4.8rem;
 }
 
 .cover h1 svg {
-  width: clamp(28.8rem, 60vi, 43.2rem);
+  width: clamp(28.8rem, 60vi, 44.8rem);
 }
 
 .cover .description {
@@ -36,7 +39,7 @@
   opacity: 0;
   transition: opacity 0.4s;
   transition-delay: 0.4s;
-  width: clamp(0%, 100%, 64rem);
+  width: 100%;
 }
 
 .cover .preview video.loaded {
@@ -44,12 +47,15 @@
 }
 
 @media (min-width: 960px) {
-  .cover {
-    flex-direction: row;
-    justify-content: space-between;
+  .cover .info {
+    grid-column: span 6;
+  }
+
+  .cover .preview {
+    grid-column: span 4 / -1;
   }
 
   .cover .preview video {
-    width: clamp(28.8rem, 40vi, 48rem);
+    margin-block-start: 2.4rem;
   }
 }

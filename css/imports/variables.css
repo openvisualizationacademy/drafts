@@ -1,7 +1,10 @@
 :root {
   color-scheme: light dark;
 
-  /* d3.schemeGreys[9] */
+  --gutter: 1.6rem;
+  --margin: 2.4rem;
+  --max-width: 134.4rem;
+
   --neutral-100: #ffffff;
   --neutral-200: #f0f0f0;
   --neutral-300: #d9d9d9;
@@ -11,8 +14,6 @@
   --neutral-700: #525252;
   --neutral-800: #252525;
   --neutral-900: #000000;
-
-  /* d3.schemeYlOrRd[9] */
   --primary-100: #ffffcc;
   --primary-200: #ffeda0;
   --primary-300: #fed976;

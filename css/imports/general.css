@@ -15,12 +15,14 @@ body {
   font-size: 1.8rem;
   font-weight: 400;
   line-height: 2.4rem;
+  overflow-x: hidden;
 }
 
 .background {
+  --radius: 1px;
   background: light-dark(var(--neutral-100), var(--neutral-900));
-  background-image: radial-gradient(circle, light-dark(var(--neutral-300), var(--neutral-800)) 1px, transparent 1px);
-  background-position: center top;
+  background-image: radial-gradient(circle, light-dark(var(--neutral-300), var(--neutral-800)) var(--radius), transparent 1px);
+  background-position: center calc(1.2rem - var(--radius));
   background-size: 2.4rem 2.4rem;
   inset: 0;
   pointer-events: none;
@@ -28,7 +30,7 @@ body {
   z-index: -1;
 
   &::before {
-    background: linear-gradient(light-dark(var(--neutral-100), var(--neutral-900)), transparent);
+    background: linear-gradient(light-dark(var(--neutral-100), var(--neutral-900)), transparent 60%);
     content: "";
     inset: 0;
     pointer-events: none;
@@ -50,37 +52,26 @@ h6 {
 section:not(.cover) {
   display: flex;
   flex-direction: column;
-  gap: 4.8rem;
   margin: 9.6rem auto;
-  max-width: 128rem;
   min-height: 50vb;
-  padding-inline: 2.4rem;
   position: relative;
+}
 
-  /* --color: var(--primary-600); */
-  /* background-image: linear-gradient(135deg, transparent 50%, var(--color) 1px, transparent calc(50% + 1px)); */
-  /* background-repeat: repeat-x; */
-  /* background-size: 0.8rem 0.8rem; */
-  /* margin-block-start: 9.6rem; */
-  /* margin-inline: 2.4rem; */
-  /* &.courses {
-    --color: var(--primary-600);
-  }
-
-  &.about {
-    --color: var(--primary-400);
-  }
-
-  &.news {
-    --color: var(--primary-300);
-  } */
+section h2 {
+  grid-column: span 12;
+  margin-block-end: 3.2rem;
 }
 
 footer {
-  margin-block-start: 9.6rem;
-  margin-inline: auto;
   min-height: 50vb;
-  padding-block: 2.4rem;
-  padding-inline: 2.4rem;
-  max-width: 128rem;
+}
+
+.grid {
+  display: grid;
+  gap: var(--gutter);
+  grid-template-columns: repeat(12, 1fr);
+  margin-inline: auto;
+  max-width: var(--max-width);
+  place-self: center;
+  width: calc(100% - calc(var(--margin) * 2));
 }

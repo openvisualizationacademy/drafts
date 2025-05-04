@@ -1,6 +1,10 @@
 .courses {
 }
 
+.courses .widget {
+  grid-column: span 12;
+}
+
 .courses .filters {
   display: flex;
   flex-wrap: wrap;
@@ -47,16 +51,12 @@
 
 .courses .filters label:has(input:checked) {
   border: 1px solid currentColor;
-
-  /* border: 1px solid light-dark(var(--neutral-900), var(--neutral-100)); */
 }
 
 .courses .filters label:has(input:checked)::before {
   background: light-dark(var(--neutral-900), var(--neutral-100));
   border: 1px solid light-dark(var(--neutral-900), var(--neutral-100));
   box-shadow: 0 0 1.6rem 0.2rem light-dark(transparent, currentColor);
-
-  /* background: currentColor; */
 }
 
 .courses .filters input {

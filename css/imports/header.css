@@ -1,12 +1,12 @@
 header {
-  margin: 0 auto;
-  max-width: 128rem;
-  padding: 1.6rem 2.4rem 0;
+  margin-block-end: 4.8rem;
+  padding-block-start: 1.6rem;
 }
 
 header nav {
   align-items: center;
   display: flex;
+  grid-column: span 12;
   justify-content: space-between;
 }
 
@@ -53,8 +53,8 @@ header nav a .logo {
 }
 
 header .account {
-  display: flex;
   align-items: center;
+  display: flex;
   gap: 1.6rem;
 }
 

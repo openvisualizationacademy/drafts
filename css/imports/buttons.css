@@ -3,13 +3,13 @@
   color: inherit;
   display: inline-flex;
   font-weight: 500;
+  letter-spacing: 0.025em;
   outline-offset: 0.4rem;
   overflow: hidden;
   position: relative;
   text-decoration: none;
   user-select: none;
   white-space: nowrap;
-  letter-spacing: 0.025em;
 }
 
 /* Fallback for browser that don’t support light-dark */
