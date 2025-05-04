@@ -244,7 +244,6 @@ export default class Logo {
   updateCanvas() {
     // Avoid redrawing logo if it’s already drawn and is very similar to target
     if (!this.wave && !this.firstTime && this.closeEnough()) {
-      console.log("not drawing");
       return;
     }
 
