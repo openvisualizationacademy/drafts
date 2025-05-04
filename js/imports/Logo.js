@@ -18,6 +18,8 @@ export default class Logo {
 
       wave: false,
       background: false, // color string or false
+      needsUpdate: true, // will be toggled to prevent redrawing same logo
+      firstTime: true, // enable initial logo to be drawn
 
       templates: [
         // horizontal
@@ -120,6 +122,11 @@ export default class Logo {
 
     // Polyfill for old iOS
     return JSON.parse(JSON.stringify(this.defaults.original));
+  }
+
+  closeEnough(arr1 = this.current.to.coords, arr2 = this.target.to.coords, tolerance = 0.001) {
+    if (arr1.length !== arr2.length) return false;
+    return arr1.every((val, i) => Math.abs(val - arr2[i]) <= tolerance);
   }
 
   // Cool transition from Freya Holmér’s Lerp Smoothing talk https://youtu.be/LSNQuFEDOyQ
@@ -235,6 +242,12 @@ export default class Logo {
   }
 
   updateCanvas() {
+    // Avoid redrawing logo if it’s already drawn and is very similar to target
+    if (!this.wave && !this.firstTime && this.closeEnough()) {
+      console.log("not drawing");
+      return;
+    }
+
     // Reset translation
     this.context.resetTransform();
 
@@ -297,6 +310,8 @@ export default class Logo {
       // Draw blended line
       this.drawLine(...blend.coords);
     }
+
+    this.firstTime = false;
   }
 
   setupSVG() {}
