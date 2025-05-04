@@ -15,7 +15,6 @@ body {
   font-size: 1.8rem;
   font-weight: 400;
   line-height: 2.4rem;
-  overflow-x: hidden;
 }
 
 .background {
@@ -47,6 +46,10 @@ h5,
 h6 {
   font-weight: 400;
   margin: 0;
+}
+
+main {
+  overflow-x: hidden;
 }
 
 section:not(.cover) {
