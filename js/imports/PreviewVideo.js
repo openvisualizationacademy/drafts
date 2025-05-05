@@ -1,9 +1,13 @@
 export default class PreviewVideos {
   constructor(selector) {
     this.element = document.querySelector(selector);
-    if (!this.element) return;
     this.video = this.element.querySelector("video");
     this.controls = this.element.querySelectorAll("[data-control]");
+    this.icons = {};
+    this.icons.play = this.element.querySelector('[data-iconoir="play"]');
+    this.icons.pause = this.element.querySelector('[data-iconoir="pause"]');
+    this.icons.soundOn = this.element.querySelector('[data-iconoir="sound-high"]');
+    this.icons.soundOff = this.element.querySelector('[data-iconoir="sound-off-alt"]');
     this.setup();
   }
 
@@ -31,7 +35,7 @@ export default class PreviewVideos {
     }
 
     if (element.webkitRequestFullScreen) {
-      element.current.webkitRequestFullScreen();
+      element.webkitRequestFullScreen();
       return;
     }
 
@@ -66,14 +70,27 @@ export default class PreviewVideos {
   play() {
     if (this.video.paused) {
       this.video.play();
+      this.icons.pause.removeAttribute("hidden");
+      this.icons.play.setAttribute("hidden", "");
       return;
     }
 
     this.video.pause();
+    this.icons.pause.setAttribute("hidden", "");
+    this.icons.play.removeAttribute("hidden");
   }
 
-  unmute() {
+  mute() {
     this.video.muted = !this.video.muted;
+
+    if (this.video.muted) {
+      this.icons.soundOn.removeAttribute("hidden");
+      this.icons.soundOff.setAttribute("hidden", "");
+      return;
+    }
+
+    this.icons.soundOn.setAttribute("hidden", "");
+    this.icons.soundOff.removeAttribute("hidden");
   }
 
   expand() {

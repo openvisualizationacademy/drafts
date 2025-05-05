@@ -167,15 +167,24 @@
         <a href="./courses.html" class="button primary">Start course</a>
       </div>
       <div class="preview">
-        <video class="preview" src="media/preview-720.mp4" oncanplaythrough="this.classList.add('loaded')" muted
-          autoplay loop playsinline></video>
+        <video src="media/preview-720.mp4" oncanplaythrough="this.classList.add('loaded')" muted loop
+          playsinline></video>
         <div class="controls">
           <div>
             <button class="button tertiary" title="Play/Pause" data-control="play">
               <svg class="icon" data-iconoir="play" width="24px" height="24px" stroke-width="2" viewBox="0 0 24 24"
-                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
                 <path
                   d="M6.90588 4.53682C6.50592 4.2998 6 4.58808 6 5.05299V18.947C6 19.4119 6.50592 19.7002 6.90588 19.4632L18.629 12.5162C19.0211 12.2838 19.0211 11.7162 18.629 11.4838L6.90588 4.53682Z">
+                </path>
+              </svg>
+              <svg class="icon" data-iconoir="pause" width="24px" height="24px" stroke-width="2" viewBox="0 0 24 24"
+                fill="none" stroke="currentColor" hidden>
+                <path
+                  d="M6 18.4V5.6C6 5.26863 6.26863 5 6.6 5H9.4C9.73137 5 10 5.26863 10 5.6V18.4C10 18.7314 9.73137 19 9.4 19H6.6C6.26863 19 6 18.7314 6 18.4Z">
+                </path>
+                <path
+                  d="M14 18.4V5.6C14 5.26863 14.2686 5 14.6 5H17.4C17.7314 5 18 5.26863 18 5.6V18.4C18 18.7314 17.7314 19 17.4 19H14.6C14.2686 19 14 18.7314 14 18.4Z">
                 </path>
               </svg>
 
@@ -183,20 +192,29 @@
             </button>
           </div>
           <div>
-            <button class="button tertiary" title="Toggle Sound" data-control="unmute">
+            <button class="button tertiary" title="Toggle Sound" data-control="mute">
               <svg class="icon" data-iconoir="sound-high" width="24px" height="24px" viewBox="0 0 24 24"
-                stroke-width="2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                stroke-linejoin="round">
+                stroke-width="2" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
                 <path
                   d="M1 13.8571V10.1429C1 9.03829 1.89543 8.14286 3 8.14286H5.9C6.09569 8.14286 6.28708 8.08544 6.45046 7.97772L12.4495 4.02228C13.1144 3.5839 14 4.06075 14 4.85714V19.1429C14 19.9392 13.1144 20.4161 12.4495 19.9777L6.45046 16.0223C6.28708 15.9146 6.09569 15.8571 5.9 15.8571H3C1.89543 15.8571 1 14.9617 1 13.8571Z">
                 </path>
                 <path d="M17.5 7.5C17.5 7.5 19 9 19 11.5C19 14 17.5 15.5 17.5 15.5"></path>
                 <path d="M20.5 4.5C20.5 4.5 23 7 23 11.5C23 16 20.5 18.5 20.5 18.5"></path>
               </svg>
+              <svg class="icon" data-iconoir="sound-off-alt" width="24px" height="24px" viewBox="0 0 24 24"
+                stroke-width="2" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                hidden>
+                <path
+                  d="M18.000,14.500L20.501,12.000M23.000,9.500L20.501,12.000M20.501,12.000L18.000,9.500M20.501,12.000L23.000,14.500">
+                </path>
+                <path
+                  d="M1.000,13.857L1.000,10.143C1.000,9.038,1.895,8.143,3.000,8.143L5.900,8.143C6.096,8.143,6.287,8.085,6.450,7.978L12.449,4.022C13.114,3.584,14.000,4.061,14.000,4.857L14.000,19.143C14.000,19.939,13.114,20.416,12.449,19.978L6.450,16.022C6.287,15.915,6.096,15.857,5.900,15.857L3.000,15.857C1.895,15.857,1.000,14.962,1.000,13.857ZZ">
+                </path>
+              </svg>
             </button>
             <button class="button tertiary" title="Expand Video" data-control="expand">
               <svg class="icon" data-iconoir="expand" width="24px" height="24px" stroke-width="2" viewBox="0 0 24 24"
-                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M9 9L4 4M4 4V8M4 4H8"></path>
                 <path d="M15 9L20 4M20 4V8M20 4H16"></path>
                 <path d="M9 15L4 20M4 20V16M4 20H8"></path>
