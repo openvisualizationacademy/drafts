@@ -78,3 +78,7 @@ footer {
   place-self: center;
   width: calc(100% - calc(var(--margin) * 2));
 }
+
+.grid .grid {
+  width: 100%;
+}
