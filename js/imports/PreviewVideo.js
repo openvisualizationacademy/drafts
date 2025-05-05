@@ -84,13 +84,13 @@ export default class PreviewVideos {
     this.video.muted = !this.video.muted;
 
     if (this.video.muted) {
-      this.icons.soundOn.removeAttribute("hidden");
-      this.icons.soundOff.setAttribute("hidden", "");
+      this.icons.soundOn.setAttribute("hidden", "");
+      this.icons.soundOff.removeAttribute("hidden");
       return;
     }
 
-    this.icons.soundOn.setAttribute("hidden", "");
-    this.icons.soundOff.removeAttribute("hidden");
+    this.icons.soundOn.removeAttribute("hidden");
+    this.icons.soundOff.setAttribute("hidden", "");
   }
 
   expand() {
