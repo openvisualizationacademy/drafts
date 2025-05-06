@@ -2,12 +2,15 @@ export default class PreviewVideos {
   constructor(selector) {
     this.element = document.querySelector(selector);
     this.video = this.element.querySelector("video");
+    this.customControls = false;
     this.controls = this.element.querySelectorAll("[data-control]");
+    this.controlsElement = this.element.querySelector(".controls");
     this.icons = {};
     this.icons.play = this.element.querySelector('[data-iconoir="play"]');
     this.icons.pause = this.element.querySelector('[data-iconoir="pause"]');
     this.icons.soundOn = this.element.querySelector('[data-iconoir="sound-high"]');
     this.icons.soundOff = this.element.querySelector('[data-iconoir="sound-off-alt"]');
+
     this.setup();
   }
 
@@ -67,8 +70,18 @@ export default class PreviewVideos {
     }
   }
 
-  play() {
-    if (this.video.paused) {
+  playWithAudio() {
+    this.restart();
+    this.play(true);
+    this.unmute(true);
+  }
+
+  restart() {
+    this.video.currentTime = 0;
+  }
+
+  play(force = false) {
+    if (this.video.paused || force) {
       this.video.play();
       this.icons.pause.removeAttribute("hidden");
       this.icons.play.setAttribute("hidden", "");
@@ -80,17 +93,17 @@ export default class PreviewVideos {
     this.icons.play.removeAttribute("hidden");
   }
 
-  mute() {
-    this.video.muted = !this.video.muted;
-
-    if (this.video.muted) {
-      this.icons.soundOn.setAttribute("hidden", "");
-      this.icons.soundOff.removeAttribute("hidden");
+  unmute(force = false) {
+    if (this.video.muted || force) {
+      this.video.muted = false;
+      this.icons.soundOn.removeAttribute("hidden");
+      this.icons.soundOff.setAttribute("hidden", "");
       return;
     }
 
-    this.icons.soundOn.removeAttribute("hidden");
-    this.icons.soundOff.setAttribute("hidden", "");
+    this.video.muted = true;
+    this.icons.soundOn.setAttribute("hidden", "");
+    this.icons.soundOff.removeAttribute("hidden");
   }
 
   expand() {
@@ -108,6 +121,21 @@ export default class PreviewVideos {
         const handler = element.dataset.control;
         if (handler in this) {
           this[handler]();
+        }
+
+        if (handler === "playWithAudio") {
+          element.remove();
+
+          if (this.customControls) {
+            this.controlsElement.hidden = false;
+            setTimeout(() => {
+              this.video.focus();
+              this.icons.play.parentElement.focus();
+            }, 100);
+          } else {
+            this.video.controls = true;
+            this.video.focus();
+          }
         }
       });
     });

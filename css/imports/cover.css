@@ -53,8 +53,19 @@
   justify-content: space-between;
 }
 
-.cover .preview .controls svg {
+.cover .preview [data-control] svg {
   width: 2rem;
+}
+
+.cover .preview .video-wrapper {
+  position: relative;
+}
+
+.cover .preview .video-wrapper [data-control] {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  translate: -50% -50%;
 }
 
 @media (min-width: 960px) {

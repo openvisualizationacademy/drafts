@@ -38,7 +38,7 @@
 }
 
 .courses .filters input:not([value="all"]) + span::before {
-  content: "" / "Tag: ";
+  /* content: "" / "Tag: "; */
 }
 
 .courses .filters label::before {

@@ -6,7 +6,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Open Visualization Academy</title>
   <link rel="stylesheet" href="css/style.css">
-  <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/iconoir-icons/iconoir@main/css/iconoir.css" /> -->
   <script src="js/script.js" type="module"></script>
 
   <!-- https://realfavicongenerator.net/ -->
@@ -37,7 +36,8 @@
           <label title="Light theme">
             <input type="radio" name="theme" value="light">
             <svg class="icon" data-iconoir="sun-light" viewBox="0 0 24 24" width="24px" height="24px"
-              stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+              stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              aria-hidden="true">
               <path
                 d="M12 18C15.3137 18 18 15.3137 18 12C18 8.68629 15.3137 6 12 6C8.68629 6 6 8.68629 6 12C6 15.3137 8.68629 18 12 18Z">
               </path>
@@ -55,7 +55,8 @@
           <label title="Dark theme">
             <input type="radio" name="theme" value="dark">
             <svg class="icon" data-iconoir="half-moon" viewBox="0 0 24 24" width="24px" height="24px"
-              stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+              aria-hidden="true">
               <path
                 d="M3 11.5066C3 16.7497 7.25034 21 12.4934 21C16.2209 21 19.4466 18.8518 21 15.7259C12.4934 15.7259 8.27411 11.5066 8.27411 3C5.14821 4.55344 3 7.77915 3 11.5066Z">
               </path>
@@ -167,19 +168,27 @@
         <a href="./courses.html" class="button primary">Start course</a>
       </div>
       <div class="preview">
-        <video src="media/preview-720.mp4" oncanplaythrough="this.classList.add('loaded')" muted loop
-          playsinline></video>
-        <div class="controls">
+        <div class="video-wrapper">
+          <video src="media/preview-720.mp4" oncanplaythrough="this.classList.add('loaded')" muted loop autoplay
+            playsinline alt="Welcome video"></video>
+
+          <button class="button tertiary" data-control="playWithAudio">
+            <svg class="icon" data-iconoir="play-solid" width="24px" height="24px" stroke-width="2" viewBox="0 0 24 24"
+              fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+              aria-hidden="true">
+              <path
+                d="M6.90588 4.53682C6.50592 4.2998 6 4.58808 6 5.05299V18.947C6 19.4119 6.50592 19.7002 6.90588 19.4632L18.629 12.5162C19.0211 12.2838 19.0211 11.7162 18.629 11.4838L6.90588 4.53682Z">
+              </path>
+            </svg>
+
+            <span>Play <span class="screen-reader">welcome video</span> with audio</span>
+          </button>
+        </div>
+        <div class="controls" hidden>
           <div>
-            <button class="button tertiary" title="Play/Pause" data-control="play">
-              <svg class="icon" data-iconoir="play" width="24px" height="24px" stroke-width="2" viewBox="0 0 24 24"
-                fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
-                <path
-                  d="M6.90588 4.53682C6.50592 4.2998 6 4.58808 6 5.05299V18.947C6 19.4119 6.50592 19.7002 6.90588 19.4632L18.629 12.5162C19.0211 12.2838 19.0211 11.7162 18.629 11.4838L6.90588 4.53682Z">
-                </path>
-              </svg>
+            <button class="button tertiary" data-control="play" title="Pause/Play">
               <svg class="icon" data-iconoir="pause" width="24px" height="24px" stroke-width="2" viewBox="0 0 24 24"
-                fill="none" stroke="currentColor" hidden>
+                fill="none" stroke="currentColor">
                 <path
                   d="M6 18.4V5.6C6 5.26863 6.26863 5 6.6 5H9.4C9.73137 5 10 5.26863 10 5.6V18.4C10 18.7314 9.73137 19 9.4 19H6.6C6.26863 19 6 18.7314 6 18.4Z">
                 </path>
@@ -187,12 +196,17 @@
                   d="M14 18.4V5.6C14 5.26863 14.2686 5 14.6 5H17.4C17.7314 5 18 5.26863 18 5.6V18.4C18 18.7314 17.7314 19 17.4 19H14.6C14.2686 19 14 18.7314 14 18.4Z">
                 </path>
               </svg>
-
-              <span><span class="screen-reader">Play or Pause</span> Welcome video</span>
+              <svg class="icon" data-iconoir="play" width="24px" height="24px" stroke-width="2" viewBox="0 0 24 24"
+                fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" hidden>
+                <path
+                  d="M6.90588 4.53682C6.50592 4.2998 6 4.58808 6 5.05299V18.947C6 19.4119 6.50592 19.7002 6.90588 19.4632L18.629 12.5162C19.0211 12.2838 19.0211 11.7162 18.629 11.4838L6.90588 4.53682Z">
+                </path>
+              </svg>
+              <!-- <span><span class="screen-reader">Play or pause</span></span> -->
             </button>
           </div>
           <div>
-            <button class="button tertiary" title="Toggle Sound" data-control="mute">
+            <button class="button tertiary" title="Mute/Unmute" data-control="unmute">
               <svg class="icon" data-iconoir="sound-off-alt" width="24px" height="24px" viewBox="0 0 24 24"
                 stroke-width="2" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
                 <path
@@ -211,9 +225,8 @@
                 <path d="M17.5 7.5C17.5 7.5 19 9 19 11.5C19 14 17.5 15.5 17.5 15.5"></path>
                 <path d="M20.5 4.5C20.5 4.5 23 7 23 11.5C23 16 20.5 18.5 20.5 18.5"></path>
               </svg>
-
             </button>
-            <button class="button tertiary" title="Expand Video" data-control="expand">
+            <button class="button tertiary" title="Expand" data-control="expand">
               <svg class="icon" data-iconoir="expand" width="24px" height="24px" stroke-width="2" viewBox="0 0 24 24"
                 fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M9 9L4 4M4 4V8M4 4H8"></path>
@@ -247,7 +260,7 @@
             <img src="./media/logos/um-light.svg" alt="University of Miami" />
           </picture>
           <p>
-            Frost Institute for Data Science & Computing<br>
+            Frost Institute for Data Science & Computing<span class="screen-reader">.</span><br>
             School of Communication
           </p>
         </a>
