@@ -72,8 +72,10 @@ export default class PreviewVideos {
 
   playWithAudio() {
     this.restart();
-    this.play(true);
-    this.unmute(true);
+    setTimeout(() => {
+      this.play(true);
+      this.unmute(true);
+    }, 100);
   }
 
   restart() {
@@ -129,12 +131,13 @@ export default class PreviewVideos {
           if (this.customControls) {
             this.controlsElement.hidden = false;
             setTimeout(() => {
-              this.video.focus();
               this.icons.play.parentElement.focus();
             }, 100);
           } else {
             this.video.controls = true;
-            this.video.focus();
+            setTimeout(() => {
+              this.video.focus();
+            }, 100);
           }
         }
       });
