@@ -22,7 +22,8 @@
   max-width: 100%;
 }
 
-.sponsors img + p {
+.sponsors img + p,
+.sponsors picture + p {
   margin: 0;
   margin-block-start: 1.6rem;
 }
