@@ -1,5 +1,6 @@
 export default class PreviewVideos {
-  constructor(selector) {
+  constructor(app, selector) {
+    this.app = app;
     this.element = document.querySelector(selector);
     this.video = this.element.querySelector("video");
     this.customControls = false;
@@ -90,6 +91,10 @@ export default class PreviewVideos {
       return;
     }
 
+    this.pause();
+  }
+
+  pause() {
     this.video.pause();
     this.icons.pause.setAttribute("hidden", "");
     this.icons.play.removeAttribute("hidden");
@@ -118,6 +123,10 @@ export default class PreviewVideos {
   }
 
   setup() {
+    if (this.app.accessibility.reducedMotion) {
+      this.pause();
+    }
+
     this.controls.forEach((element) => {
       element.addEventListener("click", () => {
         const handler = element.dataset.control;

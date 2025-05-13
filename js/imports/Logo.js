@@ -1,7 +1,8 @@
 import * as d3 from "https://cdn.jsdelivr.net/npm/d3@7/+esm";
 
 export default class Logo {
-  constructor(options = {}) {
+  constructor(app, options = {}) {
+    this.app = app;
     // Define default options
     this.defaults = {
       parent: document.body,
@@ -235,6 +236,8 @@ export default class Logo {
       // Draw line
       this.drawLine(...coords);
     }
+
+    this.firstTime = false;
   }
 
   toggleWave() {
@@ -242,6 +245,11 @@ export default class Logo {
   }
 
   updateCanvas() {
+    // Avoid animating graphics if users prefer reduced motion
+    if (!this.firstTime && this.app.accessibility.reducedMotion) {
+      return;
+    }
+
     // Avoid redrawing logo if it’s already drawn and is very similar to target
     if (!this.wave && !this.firstTime && this.closeEnough()) {
       return;
