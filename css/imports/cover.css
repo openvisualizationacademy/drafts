@@ -10,6 +10,7 @@
 
 .cover .preview {
   grid-column: span 12;
+  margin: 0;
 }
 
 .cover h1 {
