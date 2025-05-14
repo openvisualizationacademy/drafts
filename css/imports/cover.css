@@ -76,6 +76,29 @@
   opacity: 1;
 }
 
+.cover .preview .secondary {
+  display: flex;
+  font-size: 1.4rem;
+  gap: 2.4rem;
+  justify-content: space-between;
+  letter-spacing: 0.025em;
+  padding-inline: 1.2rem;
+  margin: 0;
+}
+
+.cover .preview .duration {
+  align-items: baseline;
+  color: light-dark(var(--neutral-600), var(--neutral-400));
+  display: flex;
+}
+
+.cover .preview .duration .icon {
+  height: 1em;
+  margin-inline: 0.25em;
+  translate: 0 0.05em;
+  width: 1em;
+}
+
 @media (min-width: 960px) {
   .cover .info {
     grid-column: span 6;
