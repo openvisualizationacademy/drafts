@@ -34,15 +34,22 @@
   text-wrap: balance;
 }
 
-.person img {
+.person .media {
   align-self: center;
   aspect-ratio: 1;
-  border-radius: 999px;
+  background: light-dark(var(--neutral-200), var(--neutral-800));
+  border-radius: 0.4rem;
   display: block;
   flex-shrink: 0;
   max-width: 100%;
   object-fit: cover;
+  opacity: 0.5;
+  text-align: center;
   width: 12rem;
+}
+
+.person .media[src] {
+  opacity: 1;
 }
 
 @media (hover: hover) {

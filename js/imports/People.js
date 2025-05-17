@@ -12,7 +12,11 @@ export default class People {
       const card = `
       <a href="#" class="person">
         <figure>
-          <img class="media" src="media/people/${person.photo}" loading="lazy" alt="Profile photo">
+          ${
+            person.photo
+              ? `<img class="media" src="media/people/${person.photo}" loading="lazy" alt="Profile photo">`
+              : `<div class="media"></div>`
+          }
           <figcaption>
             <strong>${person.name}<span class="screen-reader"/>.</span></strong>
             <span class="tagline">${person.tagline}</span>  

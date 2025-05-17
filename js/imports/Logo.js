@@ -246,7 +246,7 @@ export default class Logo {
 
   updateCanvas() {
     // Avoid animating graphics if users prefer reduced motion
-    if (!this.firstTime && this.app.accessibility.reducedMotion) {
+    if (!this.firstTime && this.app?.accessibility?.reducedMotion) {
       return;
     }
 
