@@ -10,7 +10,7 @@
   },
   {
     "tags": ["Conceptual"],
-    "title": "Building Stories With Data",
+    "title": "The Craft of Building Stories with Data",
     "authors": [
       {
         "name": "Gurman Bhatia"
@@ -19,7 +19,7 @@
   },
   {
     "tags": ["Conceptual"],
-    "title": "The Ethics of Data and Visualization",
+    "title": "Applied Data Ethics",
     "authors": [
       {
         "name": "Bridget Winds Cogley"
@@ -28,7 +28,7 @@
   },
   {
     "tags": ["Conceptual"],
-    "title": "The Art of Reading Visualizations",
+    "title": "How to Read Charts",
     "authors": [
       {
         "name": "Enrico Bertini"
@@ -37,7 +37,7 @@
   },
   {
     "tags": ["Conceptual"],
-    "title": "Feminist Visualization",
+    "title": "Feminist Data Visualization",
     "authors": [
       {
         "name": "Lauren Klein"
@@ -58,7 +58,7 @@
   },
   {
     "tags": ["Conceptual"],
-    "title": "Accessibility",
+    "title": "Accessibility in Visualization",
     "authors": [
       {
         "name": "Frank Elavsky"
@@ -67,7 +67,7 @@
   },
   {
     "tags": ["Conceptual"],
-    "title": "Generative AI for Visualization",
+    "title": "Generative AI for Data Analysis Visualization",
     "authors": [
       {
         "name": "Joy Victor"
@@ -76,7 +76,7 @@
   },
   {
     "tags": ["Technical"],
-    "title": "Adobe Illustrator for Visualization",
+    "title": "Adobe Illustrator for Infographics and Visualization",
     "authors": [
       {
         "name": "Hiram Henriquez"
@@ -103,7 +103,7 @@
   },
   {
     "tags": ["Technical"],
-    "title": "Flourish",
+    "title": "Visualization with Flourish",
     "authors": [
       {
         "name": "Alberto Cairo"
@@ -112,7 +112,7 @@
   },
   {
     "tags": ["Technical"],
-    "title": "Storytelling with Datawrapper",
+    "title": "Visualization with Datawrapper",
     "authors": [
       {
         "name": "Luís Melgar"
@@ -148,7 +148,7 @@
   },
   {
     "tags": ["Conceptual", "Technical"],
-    "title": "Dashboard Design Principles with Tableau and PowerBI",
+    "title": "Designing Dashboards",
     "authors": [
       {
         "name": "Bridget Winds Cogley"
@@ -179,6 +179,21 @@
     "authors": [
       {
         "name": "Deniz Cem Önduygu"
+      }
+    ]
+  },
+  {
+    "tags": ["Personal"],
+    "title": "Visualization as a Craft",
+    "authors": [
+      {
+        "name": "RJ Andrews"
+      },
+      {
+        "name": "Alberto Cairo"
+      },
+      {
+        "name": "Nadieh Bremer"
       }
     ]
   }
