@@ -1,0 +1,56 @@
+.people {
+  grid-template-columns: repeat(auto-fit, minmax(32rem, 1fr));
+  margin-block-end: 4.8rem;
+}
+
+.people a {
+  border-radius: 1.6rem;
+  color: inherit;
+  text-decoration: none;
+  transition: border 0.2s;
+}
+
+.person {
+  display: flex;
+  flex-direction: column;
+  padding: 1.6rem;
+}
+
+.person figure {
+  display: flex;
+  gap: 1.6rem;
+  margin: 0;
+}
+
+.person figcaption {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  justify-content: center;
+}
+
+.person .tagline {
+  font-size: 1.6rem;
+  text-wrap: balance;
+}
+
+.person img {
+  align-self: center;
+  aspect-ratio: 1;
+  border-radius: 999px;
+  display: block;
+  flex-shrink: 0;
+  max-width: 100%;
+  object-fit: cover;
+  width: 12rem;
+}
+
+@media (hover: hover) {
+  .people a {
+    border: 1px solid transparent;
+  }
+
+  .people a:hover {
+    border: 1px solid light-dark(var(--neutral-900), var(--neutral-100));
+  }
+}

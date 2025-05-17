@@ -26,6 +26,8 @@ export default class Courses {
   }
 
   setupFilters() {
+    console.log(this.filters);
+
     this.filters.innerHTML += `<label>
       <input type="radio" name="tag" value="all" checked/>
       <span class="tag">Show all<span class="screen-reader"/>&nbsp;courses</span></span>
