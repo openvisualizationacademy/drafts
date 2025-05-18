@@ -8,6 +8,11 @@
     url("../../fonts/AtkinsonHyperlegibleNextVF-Variable.woff2") format("woff2-variations");
 }
 
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 2.4rem;
+}
+
 body {
   background: light-dark(var(--neutral-100), var(--neutral-900));
   color: light-dark(var(--neutral-800), var(--neutral-200));

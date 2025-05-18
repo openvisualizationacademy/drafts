@@ -33,6 +33,16 @@ export default class App {
     this.contributors = new Contributors(".contributors");
     this.themePicker = new ThemePicker(".theme-picker");
     this.previewVideo = new PreviewVideo(this, ".preview");
+
+    // Allow anchor navigation, but don’t change url
+    document.querySelectorAll('a[href^="#"]').forEach((a) => {
+      const id = a.hash.replace("#", "");
+      a.addEventListener("click", (event) => {
+        event.preventDefault();
+        const element = id ? document.getElementById(id) : document.body;
+        element.scrollIntoView();
+      });
+    });
   }
 
   update() {}
