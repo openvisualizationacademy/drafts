@@ -1,6 +1,6 @@
 .people {
   grid-template-columns: repeat(auto-fit, minmax(32rem, 1fr));
-  margin-block-end: 4.8rem;
+  margin-block-end: 9.6rem;
 }
 
 .people a {
@@ -14,6 +14,7 @@
   display: flex;
   flex-direction: column;
   padding: 1.6rem;
+  position: relative;
 }
 
 .person figure {
@@ -52,6 +53,33 @@
   opacity: 1;
 }
 
+.person[data-former="true"] strong::after {
+  content: " Former";
+  font-size: 1.4rem;
+  font-weight: normal;
+  /* border: 1px solid currentColor; */
+  background: light-dark(var(--neutral-200), var(--neutral-800));
+  display: inline-block;
+  margin-inline: 0.5em;
+  padding-inline: 0.5em;
+  padding-block-start: 0.125em;
+  border-radius: 0.4rem;
+  line-height: 1.5;
+  /* opacity: 0.5; */
+}
+
+.person[data-role="contributor"] .icon {
+  position: absolute;
+  top: 1.6rem;
+  right: 1.6rem;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+a.person[data-role="contributor"]:focus-visible .icon {
+  opacity: 1;
+}
+
 @media (hover: hover) {
   .people a {
     border: 1px solid transparent;
@@ -59,5 +87,9 @@
 
   .people a:hover {
     border: 1px solid light-dark(var(--neutral-900), var(--neutral-100));
+  }
+
+  a.person[data-role="contributor"]:hover .icon {
+    opacity: 1;
   }
 }

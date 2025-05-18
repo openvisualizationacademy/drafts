@@ -166,5 +166,36 @@
     "bio": "",
     "role": "instructor",
     "links": []
+  },
+  {
+    "name": "Vinicius Sueiro",
+    "tagline": "Designer and Front-end Developer",
+    "role": "contributor",
+    "links": ["https://vsueiro.com/"]
+  },
+  {
+    "name": "Melissa Strong",
+    "tagline": "Back-end Developer",
+    "role": "contributor",
+    "links": ["https://www.linkedin.com/in/melissaashliestrong/"]
+  },
+  {
+    "name": "Larry Flores",
+    "tagline": "Video Production and Editing",
+    "role": "contributor",
+    "links": ["https://www.linkedin.com/in/larry-flores-ii-5617351bb/"]
+  },
+  {
+    "name": "Rosaura Echegaray",
+    "tagline": "Logistics and Finance",
+    "role": "contributor",
+    "links": ["https://com.miami.edu/profile/rosaura-echegaray/"]
+  },
+  {
+    "name": "Michela Tjan",
+    "tagline": "Writer and Developer",
+    "role": "contributor",
+    "links": ["https://www.linkedin.com/in/melissaashliestrong/"],
+    "former": true
   }
 ]

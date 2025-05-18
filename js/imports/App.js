@@ -1,7 +1,8 @@
 import Accessibility from "./Accessibility.js";
 import Logo from "./Logo.js";
 import Courses from "./Courses.js";
-import People from "./People.js";
+import Instructors from "./Instructors.js";
+import Contributors from "./Contributors.js";
 import ThemePicker from "./ThemePicker.js";
 import PreviewVideo from "./PreviewVideo.js";
 
@@ -28,7 +29,8 @@ export default class App {
     });
 
     this.courses = new Courses(".courses .widget");
-    this.people = new People(".people");
+    this.instructors = new Instructors(".instructors");
+    this.contributors = new Contributors(".contributors");
     this.themePicker = new ThemePicker(".theme-picker");
     this.previewVideo = new PreviewVideo(this, ".preview");
   }
