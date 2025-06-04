@@ -11,7 +11,7 @@
     }
 
     .logo {
-      margin: 96px auto;
+      margin: 24px auto;
       width: fit-content;
       cursor: pointer;
     }
@@ -21,11 +21,97 @@
       display: block;
       user-select: none;
     }
+
+    .marker {
+      width: 100px;
+      height: 100px;
+      background: black;
+      color: white;
+      position: fixed;
+      top: 0;
+      right: 0;
+    }
   </style>
   <script type="module">
     import Logo from "./js/imports/Logo.js";
 
-    window.logo = new Logo(null, { parent: ".logo" });
+    window.logo = new Logo(null, { parent: ".logo", background: 'white' });
+
+    window.delay = function (ms) {
+      return new Promise(resolve => setTimeout(resolve, ms));
+    }
+
+    // window.marker = document.querySelector('.marker');
+
+    // window.blinkMarker = function () {
+    //   marker.hidden = false
+    //   requestAnimationFrame(() => {
+    //     setTimeout(() => {
+    //       marker.hidden = true
+    //     }, 40)
+    //   })
+    // }
+
+    window.on_media_recorder_stop = function (chunks) {
+      // Gather chunks of video data into a blob and create an object URL
+      var blob = new Blob(chunks, { type: "video/webm" });
+      const recording_url = URL.createObjectURL(blob);
+      // Attach the object URL to an <a> element, setting the download file name
+      const a = document.createElement('a');
+      a.style = "display: none;";
+      a.href = recording_url;
+      a.download = "video.webm";
+      document.body.appendChild(a);
+      // Trigger the file download
+      a.click();
+      setTimeout(() => {
+        // Clean up - see https://stackoverflow.com/a/48968694 for why it is in a timeout
+        URL.revokeObjectURL(recording_url);
+        a.remove()
+      }, 100);
+    }
+
+    window.chunks = [];
+    window.canvas_stream = logo.canvas.captureStream(60); // fps
+    // Create media recorder from canvas stream
+    window.media_recorder = new MediaRecorder(canvas_stream, { mimeType: "video/webm; codecs=vp9" });
+    // Record data in chunks array when data is available
+    media_recorder.ondataavailable = (evt) => { window.chunks.push(evt.data); };
+    // Provide recorded data when recording stops
+    media_recorder.onstop = () => { window.on_media_recorder_stop(chunks); }
+
+    window.playLoop = async function () {
+
+      window.media_recorder.start();
+      // logo.canvas.style.outline = 'none';
+      // window.blinkMarker();
+
+      logo.resetTarget('dot');
+      await delay(400);
+
+      logo.resetTarget('line');
+      await delay(600);
+
+      logo.resetTarget('flat');
+      await delay(1000);
+
+      logo.resetTarget();
+      await delay(4000);
+
+      logo.resetTarget('flat');
+      await delay(1000);
+
+      logo.resetTarget('line');
+      await delay(600);
+
+      logo.resetTarget('dot');
+      await delay(1400);
+
+      window.playLoop();
+
+      window.media_recorder.stop();
+
+    }
   </script>
 </head>
 
@@ -36,13 +122,17 @@
   <button onclick="logo.resetTarget('line')">Line</button>
   <button onclick="logo.resetTarget('dot')">Dot</button>
   <button onclick="logo.randomizeTarget()">Randomize</button>
-  <button onclick="logo.autoplay()">Autoplay</button>
+  <!-- <button onclick="logo.autoplay()">Autoplay</button> -->
+
+  <button onclick="window.playLoop()">Play Loop</button>
   <label>
     Waves
     <input type="checkbox" name="wave" onclick="logo.toggleWave()">
   </label>
 
   <div class="logo"></div>
+
+  <div class="marker" hidden>Loop start</div>
 
   <button onclick="logo.download()">Download</button>
 </body>
