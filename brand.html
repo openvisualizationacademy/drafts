@@ -52,6 +52,9 @@
     //   })
     // }
 
+    // Recording code from
+    // https://julien-decharentenay.medium.com/how-to-save-html-canvas-animation-as-a-video-421157c2203b
+
     window.on_media_recorder_stop = function (chunks) {
       // Gather chunks of video data into a blob and create an object URL
       var blob = new Blob(chunks, { type: "video/webm" });
